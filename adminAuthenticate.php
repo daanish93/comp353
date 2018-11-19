@@ -1,12 +1,12 @@
 <?php
-  include('index.php');
   if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $card_number = $_POST['card_number'];
-    $password = $_POST['password'];
+    $admin = $_POST['username'];
+    $auth_password = $_POST['password'];
 
     $servername = "localhost";
     $username = "root";
     $password_db = "root";
+
     // Create connection
     $conn = new mysqli($servername, $username, $password_db);
 
@@ -23,20 +23,20 @@
     }
 
 
-    $sql = "SELECT client_id, password FROM client WHERE card_number=".$card_number.";";
+    $sql = "SELECT admin_id, pass FROM admin WHERE username='".$admin."';";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-          $client_id = $row['client_id'];
-          $auth_password= $row['password'];
+          $admin_id = $row['admin_id'];
+          $pass= $row['pass'];
         }
     }
 
-    if ($auth_password == $password){
+    if ($auth_password == $pass){
       session_start();
-      $_SESSION['client_id'] = $client_id;
-      header('Location: welcome.php');
+      $_SESSION['admin_id'] = $admin_id;
+      header('Location: adminWelcome.php');
     }
     else{
       echo "<script>M.toast({html: 'Incorrect Password!', classes: 'rounded'});</script>";

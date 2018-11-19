@@ -20,9 +20,10 @@
   <div class="nav-wrapper">
     <a href="#" class="brand-logo"> <img src="https://techflourish.com/images/money-cliparts-15.jpg" alt="" height="60" width="60">Bank of Canada</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="#account">Accounts</a></li>
-      <li><a href="#paybill">Pay Bill</a></li>
-      <li><a href="signout.php">Log Out</a></li>
+      <li><a href="#clients">Clients</a></li>
+      <li><a href="#employees">Employees</a></li>
+      <li><a href="#accounts">Accounts</a></li>
+      <li><a href="adminSignout.php">Log Out</a></li>
     </ul>
   </div>
   </nav>
@@ -30,7 +31,7 @@
 
     <?php
         session_start();
-        $client_id = $_SESSION['client_id'];
+        $admin_id = $_SESSION['admin_id'];
 
         $servername = "localhost";
         $username = "root";
@@ -50,18 +51,19 @@
         }
 
 
-        $sql = "SELECT * FROM account WHERE client_id=".$client_id.";";
+        $sql = "SELECT first_name, last_name, date_of_birth, join_date, category FROM client";
         $result = $conn->query($sql);
 
 
         if ($result->num_rows > 0) {
-          echo     "<table border='1' class='highlight'>
+          echo  "<h5>Here are the clients from the Bank</h5>
+                    <table border='1' class='highlight'>
               <tr>
-                <th>account_number</th>
-                <th>balance</th>
-                <th>interest_rate_id</th>
-                <th>account_type</th>
-                <th>client_id</th>
+                <th>First Name</th>
+                <th>Last Name </th>
+                <th>Birthdate</th>
+                <th>Joined</th>
+                <th>Category</th>
               </tr>";
             // output data of each row
             while($row = $result->fetch_assoc()) {
@@ -73,6 +75,8 @@
             }
             echo "</table>";
         }
+        else 
+            echo "<h5>There are no clients in the bank</h5>";
 
       $conn->close();
     ?>
