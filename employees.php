@@ -3,11 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <style media="screen">
-    body {
-      background-color: lightblue;
-    }
-    </style>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
@@ -51,19 +46,19 @@
         }
 
 
-        $sql = "SELECT first_name, last_name, date_of_birth, join_date, category FROM client";
+        $sql = "SELECT employee_id, first_name, last_name, start_date, salary, phone_number FROM employee";
         $result = $conn->query($sql);
 
-
         if ($result->num_rows > 0) {
-          echo  "<h5>Clients from the Bank</h5>
+          echo  "<h5>Employees from the Bank</h5>
                     <table border='1' class='highlight'>
               <tr>
+                <th>#</th>
                 <th>First Name</th>
                 <th>Last Name </th>
-                <th>Birthdate</th>
-                <th>Joined</th>
-                <th>Category</th>
+                <th>Started</th>
+                <th>Salary</th>
+                <th>Phone Number</th>
               </tr>";
             // output data of each row
             while($row = $result->fetch_assoc()) {
@@ -71,15 +66,37 @@
                 foreach($row as $data){
                   echo "<td>".$data."</td>";
                 }
+                //echo "<td><a class='waves-effect waves-light btn red darken-4'>Delete</a></td><td><a class='waves-effect waves-light btn blue'>Modify</td><td><a class='waves-effect waves-light btn green'>Details</td></tr>";
                 echo "</tr>";
             }
             echo "</table>";
         }
         else 
-            echo "<h5>There are no clients in the bank</h5>";
+            echo "<h5>There are no employees in the bank</h5>";
 
       $conn->close();
     ?>
+    
+    <br><br>
+
+    <h5>Delete Employee</h5>
+        <div class="row">
+            <form class="col s12" method="POST" action="deleteEmployee.php">
+              <div class="row">
+                <div class="input-field col s1">
+                  <input id="employee_id" name="employee_id" type="text" class="validate">
+                  <label for="employee_id">Employee ID</label>
+                </div>
+                <div class="input-field col s1">
+                <button class="btn waves-effect waves-light red darken-4" type="submit" name="action">Delete
+              </button>
+              </div>
+              </div>
+            </form>
+        </div>
+
+    <h5>Modify Employee's Details</h5>
+        
 
   </body>
 </html>
