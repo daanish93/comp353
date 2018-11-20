@@ -79,7 +79,7 @@
     
     <br><br>
 
-    <h5>Delete Employee</h5>
+    <h5>Manage Employee</h5>
         <div class="row">
             <form class="col s12" method="POST" action="deleteEmployee.php">
               <div class="row">
@@ -88,15 +88,32 @@
                   <label for="employee_id">Employee ID</label>
                 </div>
                 <div class="input-field col s1">
-                <button class="btn waves-effect waves-light red darken-4" type="submit" name="action">Delete
-              </button>
-              </div>
-              </div>
+                    <button class="btn waves-effect waves-light red darken-4" type="submit" name="action">Delete
+                    </button>
+                </div>
             </form>
+            <form class="col s12" method="POST" action="modifyEmployee.php">
+              <div class="row">
+                <div class="input-field col s1">
+                  <input id="employee_id" name="employee_id" type="text" class="validate">
+                </div>
+                <div class="input-field col s1">
+                <button class="btn waves-effect waves-light blue" type="submit" name="action">Modify
+                    </button>
+                </div>
+            </form>
+            <form class="col s12" method="POST" action="showEmployee.php">
+              <div class="row">
+                <div class="input-field col s1">
+                  <input id="employee_id" name="employee_id" type="text" class="validate">
+                </div>
+                <div class="input-field col s1">
+                <button class="btn waves-effect waves-light green" type="submit" name="action">Details
+                    </button>
+                </div>
+            </form>
+            </div>
         </div>
-
-    <h5>Modify Employee's Details</h5>
-        
 
   </body>
 </html>

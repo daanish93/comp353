@@ -28,8 +28,8 @@
     echo $result;
 
     if ($result) {
-        echo "<script>M.toast({html: 'Employee Successfully deleted!', classes: 'rounded'});</script>";
         header('Location: employees.php');
+        echo "<script>M.toast({html: 'Employee Successfully deleted!', classes: 'rounded'});</script>";
     }
     else{
       echo "<script>M.toast({html: 'Could not find this employee with ID #".$employee_id."!', classes: 'rounded'});</script>";
