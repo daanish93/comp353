@@ -30,7 +30,7 @@
 
         $servername = "localhost";
         $username = "root";
-        $password_db = "root";
+        $password_db = "";
         // Create connection
         $conn = new mysqli($servername, $username, $password_db);
 
@@ -64,9 +64,10 @@
             while($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 foreach($row as $data){
+                  $id = $row['employee_id'];
                   echo "<td>".$data."</td>";
                 }
-                //echo "<td><a class='waves-effect waves-light btn red darken-4'>Delete</a></td><td><a class='waves-effect waves-light btn blue'>Modify</td><td><a class='waves-effect waves-light btn green'>Details</td></tr>";
+                echo "<td><a class='waves-effect waves-light btn red darken-4' href=delete.php?id=$id>Delete</a></td><td><a class='waves-effect waves-light btn blue' href=modifyEmployee.php?id=$id>Modify</td><td><a class='waves-effect waves-light btn green'>Details</td></tr>";
                 echo "</tr>";
             }
             echo "</table>";
@@ -76,7 +77,7 @@
 
       $conn->close();
     ?>
-    
+    <!-- 
     <br><br>
 
     <h5>Manage Employee</h5>
@@ -114,6 +115,7 @@
             </form>
             </div>
         </div>
+        -->
 
   </body>
 </html>

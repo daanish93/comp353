@@ -13,8 +13,7 @@
 
 <?php
     //include('employees.php');
-  if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $employee_id = $_POST['employee_id'];
+    $employee_id = htmlspecialchars($_GET["id"]);
 
     $title;
     $first_name;
@@ -28,7 +27,7 @@
 
     $servername = "localhost";
     $username = "root";
-    $password_db = "root";
+    $password_db = "";
     // Create connection
     $conn = new mysqli($servername, $username, $password_db);
 
@@ -65,9 +64,7 @@
             echo "<script>M.toast({html: 'Could not find employee!', classes: 'rounded'});</script>";
         }
   
-    }else{
-    echo 'something went wrong!';
-  }
+    
 
   //$conn->close();
 ?>
@@ -90,7 +87,7 @@
     <form class="col s3" method="POST" action="submitModifyEmployee.php">
       <div class="row">
       <div class="input-field col s12">
-          <input value="<?php echo $employee_id ?>" name="employee_id" type="text" class="validate">
+          <input readonly value="<?php echo $employee_id ?>" name="employee_id" type="text" class="validate">
           <label for="employee_id">ID</label>
         </div>
         <div class="input-field col s12">

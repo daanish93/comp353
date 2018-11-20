@@ -15,7 +15,7 @@
 
     $servername = "localhost";
     $username = "root";
-    $password_db = "root";
+    $password_db = "";
     // Create connection
     $conn = new mysqli($servername, $username, $password_db);
 
@@ -34,9 +34,9 @@
     $sql = "UPDATE employee SET title='$title', first_name='$first_name', last_name='$last_name',
             salary=$salary, start_date='$start_date', phone_number=$phone_number, address='$address',
             email_address='$email_address', branch_id='$branch_id' WHERE employee_id=$employee_id;";
-    $result = $conn->query($sql);
+    
 
-    if ($result) {
+    if ($conn->query($sql) == true) {
         //echo "You have successfully modified employee with ID: " .$employee_id. "!";
         header('Location: employees.php');
     } else {
