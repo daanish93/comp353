@@ -1,7 +1,6 @@
 <?php
-  include('employees.php');
-  if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $employee_id = $_POST['employee_id'];
+ // include('employees.php');
+    $employee_id = htmlspecialchars($_GET["id"]);
 
     $servername = "localhost";
     $username = "root";
@@ -23,21 +22,23 @@
 
 
     $sql = "DELETE FROM employee WHERE employee_id=$employee_id;";
-    $result = $conn->query($sql);
 
-    echo $result;
-
-    if ($result) {
-        header('Location: employees.php');
+/*
+    if ($result == 1) {
+       // header('Location: employees.php');
         echo "<script>M.toast({html: 'Employee Successfully deleted!', classes: 'rounded'});</script>";
     }
     else{
       echo "<script>M.toast({html: 'Could not find this employee with ID #".$employee_id."!', classes: 'rounded'});</script>";
     }
-  }
-  else{
-    echo 'something went wrong!';
-  }
+*/
+    if($conn->query($sql) === true){ 
+               header('Location: employees.php');
+               echo "<script>M.toast({html: 'Employee Successfully deleted!', classes: 'rounded'});</script>";
+    } else{ 
+        echo "<script>M.toast({html: 'Could not find this employee with ID #".$employee_id."!', classes: 'rounded'});</script>";
+    } 
+  
 
   $conn->close();
 ?>

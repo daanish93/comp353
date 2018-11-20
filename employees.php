@@ -67,7 +67,7 @@
                   $id = $row['employee_id'];
                   echo "<td>".$data."</td>";
                 }
-                echo "<td><a class='waves-effect waves-light btn red darken-4' href=delete.php?id=$id>Delete</a></td><td><a class='waves-effect waves-light btn blue' href=modifyEmployee.php?id=$id>Modify</td><td><a class='waves-effect waves-light btn green'>Details</td></tr>";
+                echo "<td><a class='waves-effect waves-light btn red darken-4' href=deleteEmployee.php?id=$id>Delete</a></td><td><a class='waves-effect waves-light btn blue' href=modifyEmployee.php?id=$id>Modify</td><td><a class='waves-effect waves-light btn green'>Details</td></tr>";
                 echo "</tr>";
             }
             echo "</table>";

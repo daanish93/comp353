@@ -5,9 +5,7 @@
     <title>login</title>
 
     <style media="screen">
-    body {
-      background-color: lightblue;
-    }
+
     .center {
       display: block;
       margin-left: auto;
@@ -34,8 +32,7 @@
       <div class="nav-wrapper">
         <a href="#" class="brand-logo">Bank of Canada</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="create_employee.php">Register Employee</a></li>
-          <li><a href="create_client.php">Register Client</a></li>
+          <li><a href="create_client.php">Register</a></li>
           <li><a href="admin.php">Admin</a></li>
         </ul>
       </div>

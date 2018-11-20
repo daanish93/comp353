@@ -4,9 +4,6 @@
     <meta charset="utf-8">
     <title></title>
     <style media="screen">
-    body {
-      background-color: lightblue;
-    }
     </style>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
