@@ -41,6 +41,7 @@
          <option value="nothing" disabled selected>Account Type</option>
          <option value="chequing">Chequing</option>
          <option value="savings">Savings</option>
+         <option value="foreign currency">Foreign Currency</option>
        </select>
      </div>
     </div>
@@ -51,6 +52,7 @@
          <option value="nothing" disabled selected>Account Category</option>
          <option value="personal">personal</option>
          <option value="buisiness">buisiness</option>
+         <option value="corporate">corporate</option>
        </select>
      </div>
 
