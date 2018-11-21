@@ -75,7 +75,7 @@
             }
             echo "</table>";
         }
-        else 
+        else
             echo "<h5>There are no clients in the bank</h5>";
 
       $conn->close();

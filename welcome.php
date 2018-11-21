@@ -20,7 +20,7 @@
   <div class="nav-wrapper">
     <a href="#" class="brand-logo"> <img src="https://techflourish.com/images/money-cliparts-15.jpg" alt="" height="60" width="60">Bank of Canada</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="#account">Accounts</a></li>
+      <li><a href="welcome.php">Accounts</a></li>
       <li><a href="#paybill">Pay Bill</a></li>
       <li><a href="signout.php">Log Out</a></li>
     </ul>
@@ -44,54 +44,65 @@
 
     <?php
         session_start();
-        $client_id = $_SESSION['client_id'];
 
-        $servername = "localhost";
-        $username = "root";
-        $password_db = "";
-        // Create connection
-        $conn = new mysqli($servername, $username, $password_db);
+        if(isset($_SESSION['client_id'])){
+          $client_id = $_SESSION['client_id'];
 
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
+          $servername = "localhost";
+          $username = "root";
+          $password_db = "";
+          // Create connection
+          $conn = new mysqli($servername, $username, $password_db);
+
+          if ($conn->connect_error) {
+              die("Connection failed: " . $conn->connect_error);
+          }
+
+          $sql = "USE kec353_2";
+          if ($conn->query($sql) === TRUE) {
+
+          } else {
+              echo "<br>" . $conn->error;
+          }
+
+
+          $sql = "SELECT * FROM account WHERE client_id=".$client_id.";";
+          $result = $conn->query($sql);
+
+
+          if ($result->num_rows > 0) {
+            echo     "<table border='1' class='highlight' id='account_table'>
+                <tr>
+                  <th>account_number</th>
+                  <th>balance</th>
+                  <th>interest_rate_id</th>
+                  <th>account_type</th>
+                  <th>chargeplan_id</th>
+                  <th>account_category</th>
+                  <th>client_id</th>
+                </tr>";
+              // output data of each row
+              while($row = $result->fetch_assoc()) {
+                  echo "<tr>";
+                  foreach($row as $data){
+                    echo "<td>".$data."</td>";
+                  }
+                  echo "</tr>";
+              }
+              echo "</table>";
+          }
+
+        $conn->close();
         }
-
-        $sql = "USE kec353_2";
-        if ($conn->query($sql) === TRUE) {
-
-        } else {
-            echo "<br>" . $conn->error;
+        else{
+                echo "<script>M.toast({html: 'Please Login', classes: 'rounded'});</script>";
+                header('refresh:1,url=index.php');
         }
-
-
-        $sql = "SELECT * FROM account WHERE client_id=".$client_id.";";
-        $result = $conn->query($sql);
-
-
-        if ($result->num_rows > 0) {
-          echo     "<table border='1' class='highlight' id='account_table'>
-              <tr>
-                <th>account_number</th>
-                <th>balance</th>
-                <th>interest_rate_id</th>
-                <th>account_type</th>
-                <th>account_category</th>
-                <th>client_id</th>
-              </tr>";
-            // output data of each row
-            while($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                foreach($row as $data){
-                  echo "<td>".$data."</td>";
-                }
-                echo "</tr>";
-            }
-            echo "</table>";
-        }
-
-      $conn->close();
     ?>
-
+    <br>
+    <div class="container" style="position: relative;">
+        <a class="btn-floating btn-medium waves-effect waves-light red" style=" position: absolute;right: -150px;top: 5px;" href="createAccount.php"><i class="material-icons">+</i></a>
+    </div>
   </body>
 </html>
 
@@ -106,7 +117,7 @@ function renderAccount(value){
   if(value == 'personal'){
     account_table = document.getElementById('account_table').getElementsByTagName('tr');
     for (i=1; i<account_table.length; i++){
-      var type = account_table[i].getElementsByTagName('td')[4].innerHTML;
+      var type = account_table[i].getElementsByTagName('td')[5].innerHTML;
         if (type == 'buisiness'){
           document.getElementById('account_table').getElementsByTagName('tr')[i].style.display = 'none';
         }
@@ -118,7 +129,7 @@ function renderAccount(value){
   if(value == 'buisiness'){
     account_table = document.getElementById('account_table').getElementsByTagName('tr');
     for (i=1; i<account_table.length; i++){
-      var type = account_table[i].getElementsByTagName('td')[4].innerHTML;
+      var type = account_table[i].getElementsByTagName('td')[5].innerHTML;
         if (type == 'personal'){
           document.getElementById('account_table').getElementsByTagName('tr')[i].style.display = 'none';
         }

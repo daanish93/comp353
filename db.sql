@@ -29,6 +29,7 @@ CREATE TABLE `Account` (
   `balance` decimal(10,2) NOT NULL,
   `interest_rate_id` int(11) DEFAULT NULL,
   `account_type` varchar(255) DEFAULT NULL,
+  `chargeplan_id` int(11) DEFAULT 1 NOT NULL,
   `account_category` varchar(255) DEFAULT NULL,
   `client_id` int(11) NOT NULL,
   PRIMARY KEY (`account_number`),
@@ -45,7 +46,7 @@ CREATE TABLE `Account` (
 
 LOCK TABLES `Account` WRITE;
 /*!40000 ALTER TABLE `Account` DISABLE KEYS */;
-INSERT INTO `Account` VALUES (1,4301.55,NULL,'chequing', 'personal',1),(2,35906.09,NULL,'chequing', 'personal',2),(3,40183.21,NULL,'chequing', 'personal',3),(4,15733.93,NULL,'chequing','personal',4),(5,1980.39,NULL,'chequing','personal',5),(6,9201.71,NULL,'chequing','personal',6),(7,38899.68,NULL,'chequing','personal',7),(8,2788.90,NULL,'chequing','personal',8),(9,6457.68,NULL,'chequing','personal',9),(10,633.03,NULL,'chequing','personal',10),(11,14397.14,1,'savings','buisiness',1),(12,7566.03,1,'savings','personal',2),(13,5412.96,1,'savings','personal',3),(14,91756.09,1,'savings','personal',4),(15,36673.54,1,'savings','personal',5),(16,4588.53,1,'savings','personal',6),(17,74.54,1,'savings','personal',7),(18,382.94,1,'savings','personal',8),(19,1000000.19,1,'savings','personal',9),(20,46883.02,1,'savings','personal',10);
+INSERT INTO `Account` VALUES (1,4301.55,NULL,'chequing',1, 'personal',1),(2,35906.09,NULL,'chequing',1, 'personal',2),(3,40183.21,NULL,'chequing',1, 'personal',3),(4,15733.93,NULL,'chequing',1,'personal',4),(5,1980.39,NULL,'chequing',1,'personal',5),(6,9201.71,NULL,'chequing',1,'personal',6),(7,38899.68,NULL,'chequing',1,'personal',7),(8,2788.90,NULL,'chequing',1,'personal',8),(9,6457.68,NULL,'chequing',1,'personal',9),(10,633.03,NULL,'chequing',1,'personal',10),(11,14397.14,1,'savings',1,'buisiness',1),(12,7566.03,1,'savings',1,'personal',2),(13,5412.96,1,'savings',1,'personal',3),(14,91756.09,1,'savings',1,'personal',4),(15,36673.54,1,'savings',1,'personal',5),(16,4588.53,1,'savings',1,'personal',6),(17,74.54,1,'savings',1,'personal',7),(18,382.94,1,'savings',1,'personal',8),(19,1000000.19,1,'savings',1,'personal',9),(20,46883.02,1,'savings',1,'personal',10);
 /*!40000 ALTER TABLE `Account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,7 +110,7 @@ CREATE TABLE `ChargePlan` (
 
 LOCK TABLES `ChargePlan` WRITE;
 /*!40000 ALTER TABLE `ChargePlan` DISABLE KEYS */;
-INSERT INTO `ChargePlan` VALUES (1,'5213.62','40381.89'),(2,'4588.10','12333.61'),(3,'2252.37','31804.08'),(4,'7982.57','51523.08'),(5,'6854.69','36424.16'),(6,'6917.64','20949.65'),(7,'5653.65','2094.51'),(8,'7546.87','1011.06'),(9,'3959.83','55367.78'),(10,'2390.32','96981.31'),(11,'5213.62','40381.89'),(12,'4588.10','12333.61'),(13,'2252.37','31804.08'),(14,'7982.57','51523.08'),(15,'6854.69','36424.16'),(16,'6917.64','20949.65'),(17,'5653.65','2094.51'),(18,'7546.87','1011.06'),(19,'3959.83','55367.78'),(20,'2390.32','96981.31');
+INSERT INTO `ChargePlan` VALUES (1,'5000','25'),(2,'4588.10','12333.61'),(3,'2252.37','31804.08'),(4,'7982.57','51523.08'),(5,'6854.69','36424.16'),(6,'6917.64','20949.65'),(7,'5653.65','2094.51'),(8,'7546.87','1011.06'),(9,'3959.83','55367.78'),(10,'2390.32','96981.31'),(11,'5213.62','40381.89'),(12,'4588.10','12333.61'),(13,'2252.37','31804.08'),(14,'7982.57','51523.08'),(15,'6854.69','36424.16'),(16,'6917.64','20949.65'),(17,'5653.65','2094.51'),(18,'7546.87','1011.06'),(19,'3959.83','55367.78'),(20,'2390.32','96981.31');
 /*!40000 ALTER TABLE `ChargePlan` ENABLE KEYS */;
 UNLOCK TABLES;
 
