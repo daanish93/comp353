@@ -80,8 +80,7 @@
               </tr>";
             // output data of each row
             while($row = $result->fetch_assoc()) {
-              $account_category = $row['account_category'];
-                echo "<tr value=$account_category >";
+                echo "<tr>";
                 foreach($row as $data){
                   echo "<td>".$data."</td>";
                 }
