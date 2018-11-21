@@ -7,6 +7,7 @@
     <style media="screen">
     body {
       background-color: lightblue;
+      background-image: url('https://dzrlz2ysbzk1i.cloudfront.net/directblinds/media/direct-blinds/product%20images%20-%20lifestyles%20closeups%20swatches/vertical%20blinds/vertical%20swatches/skus/skus/bermuda-plain-dark-grey-89mm%20vertical%20blind-swatch.jpg');
     }
     .center {
       display: block;
@@ -42,7 +43,7 @@
               <div class="row">
                 <div class="input-field col s12 center">
                   <h4><em>Admin Login</em></h4>
-                  <img src="https://techflourish.com/images/money-cliparts-15.jpg" alt="" height="100" width="120" >
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnajQmgQQLoyqYYlde4AQ-KvzHhAwOM_U-ogj8imeEuMs0HpwhUg" alt="" height="100" width="120" >
                 </div>
               </div>
               <div class="row">
