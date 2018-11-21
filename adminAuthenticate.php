@@ -36,7 +36,7 @@
     if ($auth_password == $pass){
       session_start();
       $_SESSION['admin_id'] = $admin_id;
-      header('Location: adminWelcome.php');
+      header('Location: clients.php');
     }
     else{
       echo "<script>M.toast({html: 'Incorrect Password!', classes: 'rounded'});</script>";

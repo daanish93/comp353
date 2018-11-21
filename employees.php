@@ -15,7 +15,7 @@
   <div class="nav-wrapper">
     <a href="#" class="brand-logo"> <img src="https://techflourish.com/images/money-cliparts-15.jpg" alt="" height="60" width="60">Bank of Canada</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="adminWelcome.php">Clients</a></li>
+      <li><a href="clients.php">Clients</a></li>
       <li><a href="employees.php">Employees</a></li>
       <li><a href="#accounts">Accounts</a></li>
       <li><a href="adminSignout.php">Log Out</a></li>

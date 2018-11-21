@@ -17,7 +17,7 @@
   <div class="nav-wrapper">
     <a href="#" class="brand-logo"> <img src="https://techflourish.com/images/money-cliparts-15.jpg" alt="" height="60" width="60">Bank of Canada</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="adminWelcome.php">Clients</a></li>
+      <li><a href="clients.php">Clients</a></li>
       <li><a href="employees.php">Employees</a></li>
       <li><a href="#accounts">Accounts</a></li>
       <li><a href="adminSignout.php">Log Out</a></li>
@@ -48,7 +48,7 @@
         }
 
 
-        $sql = "SELECT first_name, last_name, date_of_birth, join_date, category FROM client";
+        $sql = "SELECT client_id, first_name, last_name, date_of_birth, join_date, category FROM client";
         $result = $conn->query($sql);
 
 
@@ -56,6 +56,7 @@
           echo  "<h5>Clients from the Bank</h5>
                     <table border='1' class='highlight'>
               <tr>
+                <th>#</th>
                 <th>First Name</th>
                 <th>Last Name </th>
                 <th>Birthdate</th>
@@ -66,8 +67,10 @@
             while($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 foreach($row as $data){
+                  $id = $row['client_id'];
                   echo "<td>".$data."</td>";
                 }
+                echo "<td><a class='waves-effect waves-light btn red darken-4' href=deleteClient.php?id=$id>Delete</a></td><td><a class='waves-effect waves-light btn blue' href=modifyClient.php?id=$id>Modify</td></tr>";
                 echo "</tr>";
             }
             echo "</table>";
