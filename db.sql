@@ -29,6 +29,7 @@ CREATE TABLE `Account` (
   `balance` decimal(10,2) NOT NULL,
   `interest_rate_id` int(11) DEFAULT NULL,
   `account_type` varchar(255) DEFAULT NULL,
+  `account_category` varchar(255) DEFAULT NULL,
   `client_id` int(11) NOT NULL,
   PRIMARY KEY (`account_number`),
   KEY `savings_account_client_client_id_fk` (`client_id`),
@@ -44,7 +45,7 @@ CREATE TABLE `Account` (
 
 LOCK TABLES `Account` WRITE;
 /*!40000 ALTER TABLE `Account` DISABLE KEYS */;
-INSERT INTO `Account` VALUES (1,4301.55,NULL,'chequing',1),(2,35906.09,NULL,'chequing',2),(3,40183.21,NULL,'chequing',3),(4,15733.93,NULL,'chequing',4),(5,1980.39,NULL,'chequing',5),(6,9201.71,NULL,'chequing',6),(7,38899.68,NULL,'chequing',7),(8,2788.90,NULL,'chequing',8),(9,6457.68,NULL,'chequing',9),(10,633.03,NULL,'chequing',10),(11,14397.14,1,'savings',1),(12,7566.03,1,'savings',2),(13,5412.96,1,'savings',3),(14,91756.09,1,'savings',4),(15,36673.54,1,'savings',5),(16,4588.53,1,'savings',6),(17,74.54,1,'savings',7),(18,382.94,1,'savings',8),(19,1000000.19,1,'savings',9),(20,46883.02,1,'savings',10);
+INSERT INTO `Account` VALUES (1,4301.55,NULL,'chequing', 'personal',1),(2,35906.09,NULL,'chequing', 'personal',2),(3,40183.21,NULL,'chequing', 'personal',3),(4,15733.93,NULL,'chequing','personal',4),(5,1980.39,NULL,'chequing','personal',5),(6,9201.71,NULL,'chequing','personal',6),(7,38899.68,NULL,'chequing','personal',7),(8,2788.90,NULL,'chequing','personal',8),(9,6457.68,NULL,'chequing','personal',9),(10,633.03,NULL,'chequing','personal',10),(11,14397.14,1,'savings','buisiness',1),(12,7566.03,1,'savings','personal',2),(13,5412.96,1,'savings','personal',3),(14,91756.09,1,'savings','personal',4),(15,36673.54,1,'savings','personal',5),(16,4588.53,1,'savings','personal',6),(17,74.54,1,'savings','personal',7),(18,382.94,1,'savings','personal',8),(19,1000000.19,1,'savings','personal',9),(20,46883.02,1,'savings','personal',10);
 /*!40000 ALTER TABLE `Account` ENABLE KEYS */;
 UNLOCK TABLES;
 
