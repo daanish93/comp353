@@ -2,9 +2,8 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Modify Employee</title>
+    <title>Add Employee</title>
 
-    
     <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
     <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -14,7 +13,6 @@
             $('select').formSelect();
         });
     </script>
-
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
@@ -24,17 +22,17 @@
 
 <?php
     //include('employees.php');
-    $employee_id = htmlspecialchars($_GET["id"]);
 
     $title;
     $first_name;
     $last_name;
     $address;
-    $start_date;
     $salary;
     $email_address;
     $phone_number;
     $branch_id;
+
+    $date_now = date("Y-m-d");
 
     $servername = "localhost";
     $username = "root";
@@ -55,7 +53,7 @@
     }
 
 
-    $sql = "SELECT * FROM employee WHERE employee_id=$employee_id;";
+    /*$sql = "SELECT * FROM employee WHERE employee_id=$employee_id;";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -71,9 +69,9 @@
             $branch_id = $row['branch_id'];
          }
         } else {
-            header('Location: employees.php');
+            //header('Location: employees.php');
             echo "<script>M.toast({html: 'Could not find employee!', classes: 'rounded'});</script>";
-        }
+        }*/
   
     
 
@@ -91,55 +89,51 @@
     </ul>
   </div>
   </nav>
-    <h3>Modify Employee with ID: <?php echo $employee_id ?></h3>
+    <h3>Add Employee</h3>
 
     <div class="row">
-    <form class="col s3" method="POST" action="submitModifyEmployee.php">
+    <form class="col s3" method="POST" action="submitAddEmployee.php">
       <div class="row">
-      <div class="input-field col s12">
-          <input readonly value="<?php echo $employee_id ?>" name="employee_id" type="text" class="validate">
-          <label for="employee_id">ID</label>
-        </div>
         <div class="input-field col s12">
-          <input value="<?php echo $title ?>" name="title" type="text" class="validate">
+          <input placeholder="Enter Title" name="title" type="text" class="validate">
           <label for="title">Title</label>
         </div>
         <div class="input-field col s12">
-          <input value="<?php echo $first_name ?>" name="first_name" type="text" class="validate">
+          <input placeholder="Enter First Name" name="first_name" type="text" class="validate">
           <label for="first_name">First Name</label>
         </div>
         <div class="input-field col s12">
-          <input value="<?php echo $last_name ?>" name="last_name" type="text" class="validate">
+          <input placeholder="Enter Last Name" name="last_name" type="text" class="validate">
           <label for="last_name">Last Name</label>
         </div>
       </div>
       <div class="row">
       <div class="input-field col s12">
-          <input value="<?php echo $address ?>" name="address" type="text" class="validate">
+          <input placeholder="Enter Address" name="address" type="text" class="validate">
           <label for="address">Address</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-        <input value="<?php echo $start_date ?>" name="start_date" type="text" class="validate">
-          <label for="start_date">Started</label>
+        <input readonly value='<?php echo $date_now?>' name="start_date" type="text" class="validate">
+          <label for="start_date">Start Date</label>
         </div>
       </div>
       <div class="row">
       <div class="input-field col s12">
-          <input value="<?php echo $salary ?>" name="salary" type="text" class="validate">
+          <input placeholder="Enter Salary" name="salary" type="text" class="validate">
           <label for="salary">Salary</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input value="<?php echo $email_address ?>" name="email_address" type="text" class="validate">
+          <input placeholder="Enter Email" name="email_address" type="text" class="validate">
           <label for="email_address">Email</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input value="<?php echo $phone_number ?>" name="phone_number" type="text" class="validate">
+          <input placeholder="Enter Phone Number" name="phone_number" type="text" class="validate">
           <label for="phone_number">Phone Number</label>
         </div>
       </div>
@@ -174,14 +168,12 @@
         if ($result->num_rows > 0) {
           echo  " <div class='row'> <div class='input-field col s12'>
            <select name='branch_id'>
-             <option value='$branch_id'>$branch_id</option>";
+             <option value=''>Choose Branch</option>";
             
              // output data of each row
             while($row = $result->fetch_assoc()) {
                 $id = $row['branch_id'];
-                if($id != $branch_id){
-                    echo "<option value='$id'>Branch $id</option>";
-                }
+                echo "<option value='$id'>Branch $id</option>";
             }
             echo "</select></div></div>";
         }
@@ -194,6 +186,8 @@
 
       $conn->close();
     ?>
+
+     <br> 
 
       <button class="btn waves-effect waves-light" type="submit" name="action">Submit
         </button>

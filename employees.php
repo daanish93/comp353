@@ -3,6 +3,12 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+
+    <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
@@ -24,6 +30,9 @@
   </nav>
     <h3>Welcome to the bank</h3>
 
+    <br>
+
+    <div class="container">
     <?php
         session_start();
         $admin_id = $_SESSION['admin_id'];
@@ -77,45 +86,12 @@
 
       $conn->close();
     ?>
-    <!-- 
+
+    <br>
+
+    <a class="btn-floating btn-large waves-effect waves-light red right" href="addEmployee.php"><i class="material-icons">add</i></a>
+
     <br><br>
-
-    <h5>Manage Employee</h5>
-        <div class="row">
-            <form class="col s12" method="POST" action="deleteEmployee.php">
-              <div class="row">
-                <div class="input-field col s1">
-                  <input id="employee_id" name="employee_id" type="text" class="validate">
-                  <label for="employee_id">Employee ID</label>
-                </div>
-                <div class="input-field col s1">
-                    <button class="btn waves-effect waves-light red darken-4" type="submit" name="action">Delete
-                    </button>
-                </div>
-            </form>
-            <form class="col s12" method="POST" action="modifyEmployee.php">
-              <div class="row">
-                <div class="input-field col s1">
-                  <input id="employee_id" name="employee_id" type="text" class="validate">
-                </div>
-                <div class="input-field col s1">
-                <button class="btn waves-effect waves-light blue" type="submit" name="action">Modify
-                    </button>
-                </div>
-            </form>
-            <form class="col s12" method="POST" action="showEmployee.php">
-              <div class="row">
-                <div class="input-field col s1">
-                  <input id="employee_id" name="employee_id" type="text" class="validate">
-                </div>
-                <div class="input-field col s1">
-                <button class="btn waves-effect waves-light green" type="submit" name="action">Details
-                    </button>
-                </div>
-            </form>
-            </div>
-        </div>
-        -->
-
+    </div>
   </body>
 </html>

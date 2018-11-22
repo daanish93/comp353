@@ -26,6 +26,8 @@
   </nav>
     <h3>Welcome to the bank</h3>
 
+    <div class="container">
+    <br>
     <?php
         session_start();
         $admin_id = $_SESSION['admin_id'];
@@ -81,5 +83,8 @@
       $conn->close();
     ?>
 
+    <br>
+    <br>
+    </div>
   </body>
 </html>
