@@ -22,9 +22,9 @@ src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js">
 </script>
 <script>
-$(document).ready(function() {
-  $('select').material_select();
-});
+  $(document).ready(function(){
+    $('select').formSelect();
+  });
 </script>
 
     <!-- Compiled and minified CSS -->
@@ -86,9 +86,8 @@ $(document).ready(function() {
             $branch_id = $row['branch_id'];
          }
         } else {
-            header('Location: employees.php');
-            echo "<script>M.toast({html: 'Could not find employee!', classes: 'rounded'});</script>";
-        }
+            echo "There is a problem!";
+    }
   
     
 
@@ -112,7 +111,13 @@ $(document).ready(function() {
       <form class="col s6" method="POST" action="submitModifyClient.php">
 
         <div class="row">
-          <br>
+        <div class="input-field col s1">
+          <input readonly value="<?php echo $client_id ?>" id="client_id" name="client_id" type="text" class="validate">
+          <label for="client_id">Client ID</label>
+        </div>
+        </div>
+
+        <div class="row">
         <div class="input-field col s6">
           <input value="<?php echo $first_name ?>" id="first_name" name="first_name" type="text" class="validate">
           <label for="first_name">First Name</label>
@@ -123,20 +128,27 @@ $(document).ready(function() {
         </div>
         <br>
         </div>
-        <div class = "row">
-           <label>Date of Birth</label>
+        <div class = "input-field col s6">
+           <label>Birthdate</label>
            <input value="<?php echo $date_of_birth ?>" type = "date" class = "datepicker" name="date_of_birth" />
         </div>
-
+        <br>
+        <div class = "input-field col s6">
+           <label>Joined</label>
+           <input value="<?php echo $join_date ?>" type = "date" class = "datepicker" name="join_date" />
+        </div>
+        <br>
         <div class="input-field col s6">
           <input value="<?php echo $address ?>" id="address" name="address" type="text" class="validate">
           <label for="address">Address</label>
         </div>
-
+        <br>
         <div class="input-field col s6">
           <input value="<?php echo $email_address ?>" id="email_inline" name="email" type="email" class="validate">
           <label for="email_inline">Email</label>
         </div>
+
+        <br>
         <div class="input-field col s6">
          <input value="<?php echo $phone_number ?>" id="icon_telephone" name="phone_number" type="tel" class="validate">
          <label for="icon_telephone">    <i class="material-icons">phone</i>Telephone</label>
@@ -144,22 +156,62 @@ $(document).ready(function() {
        <br>
        <div class="input-field col s12">
         <select name="category">
-          <option value="<?php echo $category ?>" selected><?php echo $category ?></option>
-          <option value="1">category 1</option>
-          <option value="2">category 2</option>
-          <option value="3">category 3</option>
+          <option value="<?php echo $category ?>" disabled selected="selected"><?php echo $category ?></option>
+          <option value="personal">Personal</option>
+          <option value="business">Business</option>
+          <option value="corporate">Corporate</option>
         </select>
       </div>
 
-        <br> <br>
-        <div class="input-field col s12">
-         <select name="branch">
-           <option value=""  selected>Choose Branch</option>
-           <option value="1">Branch 1</option>
-           <option value="2">Branch 2</option>
-           <option value="3">Branch 3</option>
-         </select>
-       </div>
+        <?php
+        //session_start();
+        //$admin_id = $_SESSION['admin_id'];
+
+        $servername = "localhost";
+        $username = "root";
+        $password_db = "";
+        // Create connection
+        $conn = new mysqli($servername, $username, $password_db);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "USE kec353_2";
+        if ($conn->query($sql) === TRUE) {
+
+        } else {
+            echo "<br>" . $conn->error;
+        }
+
+
+        $sql = "SELECT branch_id FROM branch";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+          echo  "  <br> 
+          <div class='input-field col s12'>
+           <select name='branch'>
+             <option value='$branch_id'  disabled selected='selected'>Branch $branch_id</option>";
+            
+             // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $id = $row['branch_id'];
+                echo "<option value='$id'>Branch $id</option>";
+            }
+            echo "</select></div>";
+        }
+        else 
+            echo "        <br> 
+            <div class='input-field col s12'>
+             <select name='branch'>
+               <option value=''  disabled selected>No Branch</option>
+             </select>
+           </div>";
+
+      $conn->close();
+    ?>
+
           <br>
         <div class="row">
           <div class="input-field col s12">
