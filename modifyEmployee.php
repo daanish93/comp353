@@ -177,7 +177,7 @@
         if ($result->num_rows > 0) {
           echo  " <div class='row'> <div class='input-field col s12'>
            <select name='branch_id'>
-             <option value='$branch_id'>$branch_id</option>";
+             <option value='$branch_id'>Branch $branch_id</option>";
             
              // output data of each row
             while($row = $result->fetch_assoc()) {
