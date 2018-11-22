@@ -122,9 +122,9 @@
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s12">
-        <input value="<?php echo $start_date ?>" name="start_date" type="text" class="validate">
-          <label for="start_date">Started</label>
+      <div class = "input-field col s12">
+           <label>Start Date</label>
+           <input value="<?php echo $start_date ?>" type = "date" class = "datepicker" name="start_date" />
         </div>
       </div>
       <div class="row">
