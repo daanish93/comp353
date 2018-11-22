@@ -101,7 +101,9 @@
     </ul>
   </div>
   </nav>
-    <h3>Modify Client with ID: <?php echo $client_id ?></h3>
+    <h3>Modifying Client #<?php echo $client_id ?></h3>
+
+    <br><br>
 
     <div class="container">
       <form class="col s6" method="POST" action="submitModifyClient.php">

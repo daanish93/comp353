@@ -28,14 +28,17 @@
     </ul>
   </div>
   </nav>
-    <h3>Welcome to the bank</h3>
+
+    <?php $employee_id = htmlspecialchars($_GET["id"]);?>
+
+    <h3>Employee #<?php echo $employee_id?> Information</h3>
 
     <br>
 
     <div class="container">
     <?php
-        session_start();
-        $admin_id = $_SESSION['admin_id'];
+        //session_start();
+        //$admin_id = $_SESSION['admin_id'];
 
         $servername = "localhost";
         $username = "root";
@@ -55,41 +58,61 @@
         }
 
 
-        $sql = "SELECT employee_id, first_name, last_name, start_date, salary, phone_number FROM employee";
+        $sql = "SELECT start_date, end_date, reason FROM personnel_off_duty 
+                WHERE employee_id =$employee_id";
+
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
-          echo  "<h5>Employees from the Bank</h5>
+          echo  "<h5>Off Duties</h5>
                     <table border='1' class='highlight'>
               <tr>
-                <th>#</th>
-                <th>First Name</th>
-                <th>Last Name </th>
-                <th>Started</th>
-                <th>Salary</th>
-                <th>Phone Number</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Reason</th>
               </tr>";
             // output data of each row
             while($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 foreach($row as $data){
-                  $id = $row['employee_id'];
                   echo "<td>".$data."</td>";
                 }
-                echo "<td><a class='waves-effect waves-light btn red darken-4' href=deleteEmployee.php?id=$id>Delete</a></td><td><a class='waves-effect waves-light btn blue' href=modifyEmployee.php?id=$id>Modify</td><td><a class='waves-effect waves-light btn green' href=employeeDetails.php?id=$id>Details</td></tr>";
                 echo "</tr>";
             }
             echo "</table>";
         }
         else 
-            echo "<h5>There are no employees in the bank</h5>";
+            echo "<h5>This employee does not have off duties</h5>";
+
+    $sql = "SELECT date, amount FROM payroll WHERE employee_id =$employee_id";
+
+    $result = $conn->query($sql);
+
+    $total = 0;
+
+    if ($result->num_rows > 0) {
+      echo  "<br><br><h5>Payroll</h5>
+                <table border='1' class='highlight'>
+          <tr>
+            <th>Date</th>
+            <th>Amount</th>
+          </tr>";
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            $total += $row['amount'];
+            foreach($row as $data){
+                echo "<td>".$data."</td>";
+            }
+            echo "</tr>";
+        }
+        echo "<tr><td><b>Total<b></td><td>$total</td></table>";
+    }
+    else 
+        echo "<h5>This employee did not get any payroll</h5>";
 
       $conn->close();
     ?>
-
-    <br>
-
-    <a class="btn-floating btn-large waves-effect waves-light red right" href="addEmployee.php"><i class="material-icons">add</i></a>
 
     <br><br>
     </div>

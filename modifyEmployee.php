@@ -91,7 +91,9 @@
     </ul>
   </div>
   </nav>
-    <h3>Modify Employee with ID: <?php echo $employee_id ?></h3>
+    <h3>Modifying Employee #<?php echo $employee_id ?></h3>
+
+    <br><br>
 
     <div class="row">
     <form class="col s3" method="POST" action="submitModifyEmployee.php">
