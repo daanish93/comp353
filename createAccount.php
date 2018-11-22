@@ -43,9 +43,9 @@
       <div class="input-field col s12">
        <select name="account_category">
          <option value="nothing" disabled selected>Account Category</option>
-         <option value="personal">personal</option>
-         <option value="buisiness">buisiness</option>
-         <option value="corporate">corporate</option>
+         <option value="personal">Personal</option>
+         <option value="buisiness">Buisiness</option>
+         <option value="corporate">Corporate</option>
        </select>
      </div>
 

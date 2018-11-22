@@ -182,9 +182,7 @@
              // output data of each row
             while($row = $result->fetch_assoc()) {
                 $id = $row['branch_id'];
-                if($id != $branch_id){
-                    echo "<option value='$id'>Branch $id</option>";
-                }
+                echo "<option value='$id'>Branch $id</option>";
             }
             echo "</select></div></div>";
         }
