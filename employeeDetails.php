@@ -24,6 +24,7 @@
       <li><a href="clients.php">Clients</a></li>
       <li><a href="employees.php">Employees</a></li>
       <li><a href="#accounts">Accounts</a></li>
+      <li><a href="bankDetails.php">Bank Details</a></li>
       <li><a href="adminSignout.php">Log Out</a></li>
     </ul>
   </div>
