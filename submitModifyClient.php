@@ -36,7 +36,7 @@
     }
 
     $sql = "UPDATE client SET first_name='$first_name', last_name='$last_name', 
-            join_date='$join_date', date_of_birth=$date_of_birth, category='$category', 
+            join_date='$join_date', date_of_birth='$date_of_birth', category='$category', 
             phone_number=$phone_number, address='$address', email_address='$email_address', 
             card_number='$card_number', password='$password', branch_id='$branch_id' 
             WHERE client_id=$client_id;";

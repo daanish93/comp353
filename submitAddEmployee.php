@@ -32,7 +32,7 @@
 
     $sql = "INSERT INTO employee(title, first_name, last_name, address, start_date, salary, 
             email_address, phone_number, branch_id) VALUES('$title', '$first_name', '$last_name', 
-            '$address', $start_date, $salary, '$email_address', $phone_number, $branch_id);";
+            '$address', '$start_date', $salary, '$email_address', $phone_number, $branch_id);";
     
     echo $sql;
 
