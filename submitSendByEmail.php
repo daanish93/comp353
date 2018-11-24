@@ -27,6 +27,7 @@ if(isset($_SESSION['client_id'])){
         $sender_account = $_POST['account'];
         $email = $_POST['email'];
         $amount = $_POST['amount'];
+        $date = date('Y-m-d');
         
         $sql = "SELECT balance FROM account WHERE account_number=$sender_account;";
         $result = $conn->query($sql);
@@ -61,7 +62,29 @@ if(isset($_SESSION['client_id'])){
                         WHERE account_number=$receiver_account;";
     
                     if ($conn->query($sql) == true) {
-                        //do nothing everythings good
+                        //Add the transaction
+                        $sql = "INSERT INTO transaction(account_id, type, amount, date) 
+                                VALUES($receiver_account, 'transfer', $amount, '$date');";
+                        $conn->query($sql);
+
+                        $sql = "INSERT INTO transaction(account_id, type, amount, date) 
+                        VALUES($sender_account, 'transfer', -$amount, '$date');";
+                        $conn->query($sql);
+
+                        //Update client's num of transactions
+                        $sql = "SELECT num_transaction FROM client
+                        WHERE client_id=$client_id;";
+                        $result = $conn->query($sql);
+
+                        if($result->num_rows > 0){
+                            while($row = $result->fetch_assoc()) {
+                            $transcation = $row['num_transaction'];
+                            }
+                        }
+
+                        $sql = "UPDATE client SET num_transaction=($transcation+1) 
+                        WHERE client_id=$client_id;";
+                        $conn->query($sql);
                     }
                     else{
                         $error =  "Seems like something wrong with the receiver account!";

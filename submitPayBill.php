@@ -53,15 +53,30 @@ if(isset($_SESSION['client_id'])){
 
         $date_now = date('Y-m-d');
 
-        $sql = "INSERT INTO `transaction`(`account_id`, `type`, `amount`, `date`) VALUES ($account_number,'bill payment', $bill_amount, $date_now);";
+        $sql = "INSERT INTO `transaction`(`account_id`, `type`, `amount`, `date`) VALUES ($account_number,'bill payment', $bill_amount, '$date_now');";
         echo $sql;
 
         if ($conn->query($sql) === TRUE) {
           $sql = "UPDATE `account` SET `balance`=$new_balance WHERE account_number=$account_number";
 
           if ($conn->query($sql) === TRUE) {
-            header('Location: payBills.php');
-            //echo 'insertion success';
+            $sql = "SELECT num_transaction FROM client
+            WHERE client_id=$client_id;";
+            $result = $conn->query($sql);
+
+            if($result->num_rows > 0){
+                while($row = $result->fetch_assoc()) {
+                    $transcation = $row['num_transaction'];
+                  }
+            }
+
+            $sql = "UPDATE client SET num_transaction=($transcation+1) 
+            WHERE client_id=$client_id;";
+            
+            if($conn->query($sql) === TRUE){
+              header('Location: payBills.php');
+              //echo 'insertion success';
+            }
           } else {
               echo 'insertion failed';
           }
@@ -84,8 +99,9 @@ if(isset($_SESSION['client_id'])){
       if($new_balance >= 0){
 
         $date_now = date('Y-m-d');
+        echo $date_now;
 
-        $sql = "INSERT INTO `transaction`(`account_id`, `type`, `amount`, `date`) VALUES ($account_number,'bill payment', $amount, $date_now);";
+        $sql = "INSERT INTO `transaction`(`account_id`, `type`, `amount`, `date`) VALUES ($account_number,'bill payment', $amount, '$date_now');";
         echo $sql;
 
 
@@ -106,8 +122,26 @@ if(isset($_SESSION['client_id'])){
 
             $sql = "UPDATE `liability` SET `balance`=$liability_balance-$amount WHERE liability_id=$liability_id";
             if ($conn->query($sql) === TRUE) {
-              //echo "SUCCESS";
-              header('Location: payBills.php');
+              $sql = "SELECT num_transaction FROM client
+              WHERE client_id=$client_id;";
+              $result = $conn->query($sql);
+
+              if($result->num_rows > 0){
+                  while($row = $result->fetch_assoc()) {
+                      $transcation = $row['num_transaction'];
+                    }
+              }
+
+              $sql = "UPDATE client SET num_transaction=($transcation+1) 
+              WHERE client_id=$client_id;";
+                          
+              if($conn->query($sql) === TRUE){
+                header('Location: payBills.php');
+                //echo 'insertion success';
+              }
+              else{
+                echo 'insertion failed';
+              }
             } else {
                 echo 'insertion failed';
             }
