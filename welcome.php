@@ -70,16 +70,18 @@
                   <th>balance</th>
                   <th>interest_rate_id</th>
                   <th>account_type</th>
-                  <th>chargeplan_id</th>
                   <th>account_category</th>
-                  <th>client_id</th>
+                  <th>number of transactions</th>
                 </tr>";
               // output data of each row
               while($row = $result->fetch_assoc()) {
                   echo "<tr>";
-                  foreach($row as $data){
-                    echo "<td>".$data."</td>";
-                  }
+                    echo "<td>".$row['account_number']."</td>";
+                    echo "<td>".$row['balance']."</td>";
+                    echo "<td>".$row['interest_rate_id']."</td>";
+                    echo "<td>".$row['account_type']."</td>";
+                    echo "<td>".$row['account_category']."</td>";
+                    echo "<td>".$row['num_transactions']."</td>";
                   echo "</tr>";
               }
               echo "</table>";
