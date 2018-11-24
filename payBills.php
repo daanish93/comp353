@@ -49,10 +49,10 @@
       if ($result->num_rows > 0) {
         echo     "<table border='1' class='highlight' id='account_table'>
             <tr>
-              <th>account_number</th>
-              <th>balance</th>
-              <th>account_type</th>
-              <th>account_category</th>
+              <th>Account Number</th>
+              <th>Balance</th>
+              <th>Type</th>
+              <th>Category</th>
               <th></th>
             </tr>";
           // output data of each row
@@ -85,11 +85,11 @@
            <col span='1' style='width: 15%;'>
         </colgroup>
             <tr>
-              <th>liability_id</th>
-              <th>type</th>
-              <th>credit limit</th>
-              <th>balance</th>
-              <th></th>
+              <th>Liability ID</th>
+              <th>Type</th>
+              <th>Credit Limit</th>
+              <th>Balance</th>
+              <th>Amount</th>
             </tr>
             <?php
           // output data of each row
@@ -114,19 +114,27 @@
     }
 
 ?>
+<br><br>
 <h5>Or pay your bills</h5>
-<table>
-  <tr>
-    <th>Name of Bill</th>
-    <th>Bill identification number</th>
-    <th>Amount</th>
-  </tr>
-  <tr>
-    <td> <input type="text" name="bill_name" value=""> </td>
-    <td> <input type="text" name="bill_number" value=""> </td>
-    <td> <input type="text" name="bill_amount" value=""> </td>
-  </tr>
-</table>
+
+    <div class='row'>
+
+    <div class="input-field col s4">
+    <input type="text" name="bill_name" value="">
+    <label for="amount">Bill Name</label>
+    </div>
+
+    <div class="input-field col s4">
+    <input type="text" name="bill_number" value=""> 
+    <label for="amount">Bill ID</label>
+    </div>
+
+    <div class="input-field col s4">
+    <input type="text" name="bill_amount" value="">
+    <label for="amount">Amount</label>
+    </div>
+
+    </div>
 
 <button class="btn waves-effect waves-light" type="submit" name="action" >Submit
   <i class="material-icons right"></i>
