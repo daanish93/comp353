@@ -3,12 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-
-    <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
-    <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-
+    <style media="screen">
+    </style>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
@@ -23,19 +19,17 @@
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li><a href="clients.php">Clients</a></li>
       <li><a href="employees.php">Employees</a></li>
-      <li><a href="bankDetails.php">Bank Details</a></li>
       <li><a href="accounts.php">Accounts</a></li>
+      <li><a href="bankDetails.php">Bank Details</a></li>
       <li><a href="adminSignout.php">Log Out</a></li>
     </ul>
   </div>
   </nav>
-
-    <br>
+    <h3>Welcome to the bank</h3>
 
     <div class="container">
+    <br>
     <?php
-        session_start();
-        $admin_id = $_SESSION['admin_id'];
 
         $servername = "localhost";
         $username = "root";
@@ -55,43 +49,44 @@
         }
 
 
-        $sql = "SELECT employee_id, first_name, last_name, start_date, salary, phone_number FROM employee";
+        $sql = "SELECT account_number, balance, account_type, account_category, transaction_limit
+                FROM account";
         $result = $conn->query($sql);
 
+
         if ($result->num_rows > 0) {
-          echo  "<h5>Employees</h5>
+          echo  "<h5>Accounts</h5>
                     <table border='1' class='highlight'>
               <tr>
-                <th>#</th>
-                <th>First Name</th>
-                <th>Last Name </th>
-                <th>Started</th>
-                <th>Salary</th>
-                <th>Phone Number</th>
+                <th>Account Number</th>
+                <th>Balance</th>
+                <th>Type</th>
+                <th>Category</th>
+                <th>Limit</th>
               </tr>";
             // output data of each row
             while($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 foreach($row as $data){
-                  $id = $row['employee_id'];
-                  echo "<td>".$data."</td>";
+                    if($data == $row['balance']){
+                        echo "<td>$".$data."</td>";
+                    }
+                    else{
+                        echo "<td>".$data."</td>";
+                    }
                 }
-                echo "<td><a class='waves-effect waves-light btn red darken-4' href=deleteEmployee.php?id=$id>Delete</a></td><td><a class='waves-effect waves-light btn blue' href=modifyEmployee.php?id=$id>Modify</td><td><a class='waves-effect waves-light btn green' href=employeeDetails.php?id=$id>Details</td></tr>";
                 echo "</tr>";
             }
             echo "</table>";
         }
-        else 
-            echo "<h5>There are no employees in the bank</h5>";
+        else
+            echo "<h5>There are no accounts in the bank</h5>";
 
       $conn->close();
     ?>
 
     <br>
-
-    <a class="btn-floating btn-large waves-effect waves-light red right" href="addEmployee.php"><i class="material-icons">add</i></a>
-
-    <br><br>
+    <br>
     </div>
   </body>
 </html>

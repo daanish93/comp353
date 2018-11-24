@@ -23,7 +23,7 @@
     <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="clients.php">Clients</a></li>
         <li><a href="employees.php">Employees</a></li>
-        <li><a href="#accounts">Accounts</a></li>
+        <li><a href="accounts.php">Accounts</a></li>
         <li><a href="adminSignout.php">Log Out</a></li>
     </ul>
   </div>
@@ -134,7 +134,12 @@
                 $totalPayroll += $row['amount'];
                 foreach($row as $data){
                     if($data != $row['employee_id']){
-                        echo "<td>".$data."</td>";
+                        if($data == $row['amount']){
+                            echo "<td>$".$data."</td>";
+                        }
+                        else{
+                            echo "<td>".$data."</td>";
+                        }
                     }
                 }
                 echo "</tr>";

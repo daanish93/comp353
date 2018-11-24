@@ -19,7 +19,7 @@
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li><a href="clients.php">Clients</a></li>
       <li><a href="employees.php">Employees</a></li>
-      <li><a href="#accounts">Accounts</a></li>
+      <li><a href="accounts.php">Accounts</a></li>
       <li><a href="bankDetails.php">Bank Details</a></li>
       <li><a href="adminSignout.php">Log Out</a></li>
     </ul>
@@ -56,7 +56,7 @@
 
 
         if ($result->num_rows > 0) {
-          echo  "<h5>Clients from the Bank</h5>
+          echo  "<h5>Clients</h5>
                     <table border='1' class='highlight'>
               <tr>
                 <th>#</th>
