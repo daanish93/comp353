@@ -122,12 +122,48 @@ if(isset($_SESSION['client_id'])){
 
     }
     else{
-      echo "you were missing information. please go back";
+      $error =  "you were missing information. please go back";
     }
   }
   else {
-    echo "you did not select an account";
+    $error =  "you did not select an account";
   }
 
 }
  ?>
+ <!DOCTYPE html>
+ <html lang="en" dir="ltr">
+   <head>
+     <meta charset="utf-8">
+     <title></title>
+     <style media="screen">
+     body {
+       background-color: lightblue;
+     }
+     </style>
+     <!-- Compiled and minified CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+     <!-- Compiled and minified JavaScript -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+   </head>
+   <body>
+     <?php
+       include('client_navbar.php');
+      ?>
+
+      <div class="container">
+
+        <?php
+        if(isset($error)) {
+            echo "<h4 style='color:red'><em> $error </em> </h4>";
+        }
+
+
+        ?>
+
+      </div>
+
+  </body>
+  </html>
