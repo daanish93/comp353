@@ -81,7 +81,7 @@
                     echo "<td>".$row['interest_rate_id']."</td>";
                     echo "<td>".$row['account_type']."</td>";
                     echo "<td>".$row['account_category']."</td>";
-                    echo "<td>".$row['num_transactions']."</td>";
+                    echo "<td>".$row['transaction_limit']."</td>";
                   echo "</tr>";
               }
               echo "</table>";
