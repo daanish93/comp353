@@ -182,7 +182,7 @@ CREATE TABLE `client` (
   `branch_id` int(11) DEFAULT NULL,
   `card_number` bigint(255) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `num_transaction` int(11) DEFAULT NULL,
+  `num_transaction` int(11) DEFAULT 0,
   PRIMARY KEY (`client_id`),
   KEY `client_branch_branch_id_fk` (`branch_id`),
   CONSTRAINT `client_branch_branch_id_fk` FOREIGN KEY (`branch_id`) REFERENCES `branch` (`branch_id`) ON DELETE SET NULL ON UPDATE CASCADE
