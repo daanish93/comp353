@@ -48,20 +48,25 @@
       }
 
 
-      $sql = "SELECT * FROM account WHERE client_id=".$client_id." AND account_type='chequing';";
+      $sql = "SELECT * FROM account WHERE client_id=$client_id;";
       $result = $conn->query($sql);
 
 ?>
       <br><br>
   <div class="container">
 
-   <h5>Transfer Money</h5>
-  <form action="submitTransfer.php" method="post">
+      <h5>Send Money By Email</h5>
+
+<br>
+
+<a class='waves-effect waves-light btn' href='interact_phone.php'>Send money by phone</a><br><br>
+
+  <form action="submitSendByEmail.php" method="post">
 <?php
         echo "  <br><div class='row'>
         <div class='input-field col s4'>
-          <select name='chequing' class='icons'>
-            <option value='' disabled selected>Choose a Chequing Account</option>";
+          <select name='account' class='icons'>
+            <option value='' disabled selected>Choose an Account</option>";
 
       if ($result->num_rows > 0) {
           // output data of each row
@@ -72,34 +77,34 @@
           }
       }
       else{
-            echo "<option value=''>You have no Chequing Account</option>";
+            echo "<option value=''>You have no Account</option>";
       }
 
       echo "</select>
-          <label>From</label>
+          <label>Account</label>
         </div>";
 
-        $sql = "SELECT * FROM account WHERE client_id=".$client_id." AND account_type='savings';";
+        $sql = "SELECT email_address FROM client WHERE client_id<>$client_id;";
         $result = $conn->query($sql);
 
-      echo " <div class='input-field col s4'>
-          <select name= 'savings' class='icons'>
-            <option value='' disabled selected>Choose a Savings Account</option>";
+      echo " 
+        <div class='input-field col s4'>
+          <select name= 'email' class='icons'>
+            <option value='' disabled selected>Choose an email</option>";
 
       if ($result->num_rows > 0) {
           // output data of each row
           while($row = $result->fetch_assoc()) {
-              $account_number = $row['account_number'];
-              $balance = $row['balance'];
-              echo "<option value = '$account_number'>Savings Account #$account_number ($$balance)</option>";
+              $email = $row['email_address'];
+              echo "<option value = '$email'>$email</option>";
           }
       }
       else{
-            echo "<option value=''>You have no Saving Account</option>";
+            echo "<option value=''>There are no emails</option>";
       }
 
       echo "</select>
-          <label>To</label>
+          <label>Email</label>
         </div>";
 
     $conn->close();
@@ -116,12 +121,11 @@
         <label for="amount">Amount</label>
         </div>
 
-           </div>
-
-        <button class='btn waves-effect waves-light' type='submit' name='action'>Transfer Money
-        <i class='material-icons right'></i>
-        </button>
-
+        <div class="input-field col s6">
+        <button class='btn waves-effect waves-light' type='submit' name='action'>Send Money
+      </button>
+      </div>
+      </div>
       <br><br><br>
       </form>
 
