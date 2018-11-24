@@ -68,7 +68,6 @@
                 <tr>
                   <th>account_number</th>
                   <th>balance</th>
-                  <th>interest_rate_id</th>
                   <th>account_type</th>
                   <th>account_category</th>
                   <th>number of transactions</th>
@@ -78,7 +77,6 @@
                   echo "<tr>";
                     echo "<td>".$row['account_number']."</td>";
                     echo "<td>".$row['balance']."</td>";
-                    echo "<td>".$row['interest_rate_id']."</td>";
                     echo "<td>".$row['account_type']."</td>";
                     echo "<td>".$row['account_category']."</td>";
                     echo "<td>".$row['transaction_limit']."</td>";
@@ -112,7 +110,7 @@ function renderAccount(value){
   if(value == 'personal'){
     account_table = document.getElementById('account_table').getElementsByTagName('tr');
     for (i=1; i<account_table.length; i++){
-      var type = account_table[i].getElementsByTagName('td')[4].innerHTML;
+      var type = account_table[i].getElementsByTagName('td')[3].innerHTML;
         if (type == 'buisiness'){
           document.getElementById('account_table').getElementsByTagName('tr')[i].style.display = 'none';
         }
@@ -124,7 +122,7 @@ function renderAccount(value){
   if(value == 'buisiness'){
     account_table = document.getElementById('account_table').getElementsByTagName('tr');
     for (i=1; i<account_table.length; i++){
-      var type = account_table[i].getElementsByTagName('td')[4].innerHTML;
+      var type = account_table[i].getElementsByTagName('td')[3].innerHTML;
         if (type == 'personal'){
           document.getElementById('account_table').getElementsByTagName('tr')[i].style.display = 'none';
         }
