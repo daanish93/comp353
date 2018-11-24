@@ -112,7 +112,7 @@ function renderAccount(value){
   if(value == 'personal'){
     account_table = document.getElementById('account_table').getElementsByTagName('tr');
     for (i=1; i<account_table.length; i++){
-      var type = account_table[i].getElementsByTagName('td')[5].innerHTML;
+      var type = account_table[i].getElementsByTagName('td')[4].innerHTML;
         if (type == 'buisiness'){
           document.getElementById('account_table').getElementsByTagName('tr')[i].style.display = 'none';
         }
@@ -124,7 +124,7 @@ function renderAccount(value){
   if(value == 'buisiness'){
     account_table = document.getElementById('account_table').getElementsByTagName('tr');
     for (i=1; i<account_table.length; i++){
-      var type = account_table[i].getElementsByTagName('td')[5].innerHTML;
+      var type = account_table[i].getElementsByTagName('td')[4].innerHTML;
         if (type == 'personal'){
           document.getElementById('account_table').getElementsByTagName('tr')[i].style.display = 'none';
         }
