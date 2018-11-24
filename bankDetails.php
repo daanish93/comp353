@@ -147,7 +147,7 @@
 
     //PROFITS BY BRANCH  
     
-    $sql = "SELECT client_id, amount FROM transaction WHERE type='deposit';";
+    $sql = "SELECT account_id, amount FROM transaction WHERE type='deposit';";
 
     $result = $conn->query($sql);
 
@@ -164,42 +164,53 @@
         // output data of each row
         while($row = $result->fetch_assoc()) {
             echo "<tr>";
-            $client_id = $row['client_id'];
-            $sqlBranch = "SELECT branch_id FROM client WHERE client_id=$client_id;";
-            $resultBranch = $conn->query($sqlBranch);
-            if ($resultBranch->num_rows > 0) {
-                while($rowBranch = $resultBranch->fetch_assoc()){
-                    $branch_id = $rowBranch['branch_id'];
-                    echo"<td>".$branch_id."</td>";
-                    $sqlLocation = "SELECT location FROM branch WHERE branch_id=$branch_id;";
-                    $resultLocation = $conn->query($sqlLocation);
-                    if($resultLocation->num_rows > 0){
-                        while($rowLocation = $resultLocation->fetch_assoc()){
-                            $location = $rowLocation['location'];
-                            $sqlCity = "SELECT city FROM location WHERE location_id=$location;";
-                            $resultCity =  $conn->query($sqlCity);
-                            if($resultCity->num_rows > 0){
-                                while($rowCity = $resultCity->fetch_assoc()){
-                                    $city = $rowCity['city'];
-                                    echo"<td>".$city."</td>";
+            $account_id = $row['account_id'];
+            $sqlClient = "SELECT client_id FROM account WHERE account_number=$account_id;";
+            $resultClient = $conn->query($sqlClient);
+            if($resultClient->num_rows > 0){
+                while($rowClient = $resultClient->fetch_assoc()){
+                    $client_id = $rowClient['client_id'];
+                    $sqlBranch = "SELECT branch_id FROM client WHERE client_id=$client_id;";
+                    $resultBranch = $conn->query($sqlBranch);
+                    if ($resultBranch->num_rows > 0) {
+                        while($rowBranch = $resultBranch->fetch_assoc()){
+                            $branch_id = $rowBranch['branch_id'];
+                            echo"<td>".$branch_id."</td>";
+                            $sqlLocation = "SELECT location FROM branch WHERE branch_id=$branch_id;";
+                            $resultLocation = $conn->query($sqlLocation);
+                            if($resultLocation->num_rows > 0){
+                                while($rowLocation = $resultLocation->fetch_assoc()){
+                                    $location = $rowLocation['location'];
+                                    $sqlCity = "SELECT city FROM location WHERE location_id=$location;";
+                                    $resultCity =  $conn->query($sqlCity);
+                                    if($resultCity->num_rows > 0){
+                                        while($rowCity = $resultCity->fetch_assoc()){
+                                            $city = $rowCity['city'];
+                                            echo"<td>".$city."</td>";
+                                        }
+                                    }
+                                    else{
+                                        echo"<td>Unknown City</td>";
+                                    }
                                 }
                             }
                             else{
-                                echo"<td>Unknown City</td>";
+                                echo"<td>Unknown Location</td>";
                             }
                         }
                     }
                     else{
-                        echo"<td>Unknown Location</td>";
+                        echo"<td>Unknown Branch</td>";
                     }
-                }
+               }
             }
             else{
-                echo"<td>Unknown Branch</td>";
+                echo"<td>Unknown Account</td>";
             }
+
             $total += $row['amount'];
             foreach($row as $data){
-                if($data != $row['client_id']){
+                if($data != $row['account_id']){
                     echo "<td>$".$data."</td>";
                 }
             }
@@ -213,7 +224,7 @@
     
     //PROFITS BY CITY  
     
-    $sql = "SELECT client_id, amount FROM transaction WHERE type='deposit';";
+    $sql = "SELECT account_id, amount FROM transaction WHERE type='deposit';";
 
     $result = $conn->query($sql);
 
@@ -230,44 +241,54 @@
         // output data of each row
         while($row = $result->fetch_assoc()) {
             echo "<tr>";
-            $client_id = $row['client_id'];
-            $sqlBranch = "SELECT branch_id FROM client WHERE client_id=$client_id;";
-            $resultBranch = $conn->query($sqlBranch);
-            if ($resultBranch->num_rows > 0) {
-                while($rowBranch = $resultBranch->fetch_assoc()){
-                    $branch_id = $rowBranch['branch_id'];
-                    $sqlLocation = "SELECT location FROM branch WHERE branch_id=$branch_id;";
-                    $resultLocation = $conn->query($sqlLocation);
-                    if($resultLocation->num_rows > 0){
-                        while($rowLocation = $resultLocation->fetch_assoc()){
-                            $location = $rowLocation['location'];
-                            $sqlCity = "SELECT provence, city FROM location WHERE location_id=$location;";
-                            $resultCity =  $conn->query($sqlCity);
-                            if($resultCity->num_rows > 0){
-                                while($rowCity = $resultCity->fetch_assoc()){
-                                    $city = $rowCity['city'];
-                                    $provence = $rowCity['provence'];
-                                    echo"<td>".$city."</td>";
-                                    echo"<td>".$provence."</td>";
+            $account_id = $row['account_id'];
+            $sqlClient = "SELECT client_id FROM account WHERE account_number=$account_id;";
+            $resultClient = $conn->query($sqlClient);
+            if($resultClient->num_rows > 0){
+                while($rowClient = $resultClient->fetch_assoc()){
+                    $client_id = $rowClient['client_id'];
+                    $sqlBranch = "SELECT branch_id FROM client WHERE client_id=$client_id;";
+                    $resultBranch = $conn->query($sqlBranch);
+                    if ($resultBranch->num_rows > 0) {
+                        while($rowBranch = $resultBranch->fetch_assoc()){
+                            $branch_id = $rowBranch['branch_id'];
+                            $sqlLocation = "SELECT location FROM branch WHERE branch_id=$branch_id;";
+                            $resultLocation = $conn->query($sqlLocation);
+                            if($resultLocation->num_rows > 0){
+                                while($rowLocation = $resultLocation->fetch_assoc()){
+                                    $location = $rowLocation['location'];
+                                    $sqlCity = "SELECT provence, city FROM location WHERE location_id=$location;";
+                                    $resultCity =  $conn->query($sqlCity);
+                                    if($resultCity->num_rows > 0){
+                                        while($rowCity = $resultCity->fetch_assoc()){
+                                            $city = $rowCity['city'];
+                                            $provence = $rowCity['provence'];
+                                            echo"<td>".$city."</td>";
+                                            echo"<td>".$provence."</td>";
+                                        }
+                                    }
+                                    else{
+                                        echo"<td>Unknown City</td>";
+                                    }
                                 }
                             }
                             else{
-                                echo"<td>Unknown City</td>";
+                                echo"<td>Unknown Location</td>";
                             }
                         }
                     }
                     else{
-                        echo"<td>Unknown Location</td>";
+                        echo"<td>Unknown Branch</td>";
                     }
                 }
             }
             else{
-                echo"<td>Unknown Branch</td>";
+                echo"<td>Unknown Account</td>";
             }
-
+            
             $total += $row['amount'];
             foreach($row as $data){
-                if($data != $row['client_id']){
+                if($data != $row['account_id']){
                     echo "<td>$".$data."</td>";
                 }
             }
@@ -279,140 +300,160 @@
         echo "<h5>The bank has not make any Profits</h5>";
 
     
-        //LOSSES BY BRANCH  
+    //LOSSES BY BRANCH  
     
-        $sql = "SELECT client_id, amount FROM transaction WHERE type='withdraw';";
+    $sql = "SELECT account_id, amount FROM transaction WHERE type='withdraw';";
 
-        $result = $conn->query($sql);
-    
-        $total = 0;
-    
-        if ($result->num_rows > 0) {
-          echo  "<br><br><h5>Losses By Branch</h5>
-                    <table border='1' class='highlight'>
-              <tr>
-                <th>Branch ID</th>
-                <th>City</th>
-                <th>Amount</th>
-              </tr>";
-            // output data of each row
-            while($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                $client_id = $row['client_id'];
-                $sqlBranch = "SELECT branch_id FROM client WHERE client_id=$client_id;";
-                $resultBranch = $conn->query($sqlBranch);
-                if ($resultBranch->num_rows > 0) {
-                    while($rowBranch = $resultBranch->fetch_assoc()){
-                        $branch_id = $rowBranch['branch_id'];
-                        echo"<td>".$branch_id."</td>";
-                        $sqlLocation = "SELECT location FROM branch WHERE branch_id=$branch_id;";
-                        $resultLocation = $conn->query($sqlLocation);
-                        if($resultLocation->num_rows > 0){
-                            while($rowLocation = $resultLocation->fetch_assoc()){
-                                $location = $rowLocation['location'];
-                                $sqlCity = "SELECT city FROM location WHERE location_id=$location;";
-                                $resultCity =  $conn->query($sqlCity);
-                                if($resultCity->num_rows > 0){
-                                    while($rowCity = $resultCity->fetch_assoc()){
-                                        $city = $rowCity['city'];
-                                        echo"<td>".$city."</td>";
+    $result = $conn->query($sql);
+
+    $total = 0;
+
+    if ($result->num_rows > 0) {
+      echo  "<br><br><h5>Losses By Branch</h5>
+                <table border='1' class='highlight'>
+          <tr>
+            <th>Branch ID</th>
+            <th>City</th>
+            <th>Amount</th>
+          </tr>";
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            $account_id = $row['account_id'];
+            $sqlClient = "SELECT client_id FROM account WHERE account_number=$account_id;";
+            $resultClient = $conn->query($sqlClient);
+            if($resultClient->num_rows > 0){
+                while($rowClient = $resultClient->fetch_assoc()){
+                    $client_id = $rowClient['client_id'];
+                    $sqlBranch = "SELECT branch_id FROM client WHERE client_id=$client_id;";
+                    $resultBranch = $conn->query($sqlBranch);
+                    if ($resultBranch->num_rows > 0) {
+                        while($rowBranch = $resultBranch->fetch_assoc()){
+                            $branch_id = $rowBranch['branch_id'];
+                            echo"<td>".$branch_id."</td>";
+                            $sqlLocation = "SELECT location FROM branch WHERE branch_id=$branch_id;";
+                            $resultLocation = $conn->query($sqlLocation);
+                            if($resultLocation->num_rows > 0){
+                                while($rowLocation = $resultLocation->fetch_assoc()){
+                                    $location = $rowLocation['location'];
+                                    $sqlCity = "SELECT city FROM location WHERE location_id=$location;";
+                                    $resultCity =  $conn->query($sqlCity);
+                                    if($resultCity->num_rows > 0){
+                                        while($rowCity = $resultCity->fetch_assoc()){
+                                            $city = $rowCity['city'];
+                                            echo"<td>".$city."</td>";
+                                        }
+                                    }
+                                    else{
+                                        echo"<td>Unknown City</td>";
                                     }
                                 }
-                                else{
-                                    echo"<td>Unknown City</td>";
-                                }
+                            }
+                            else{
+                                echo"<td>Unknown Location</td>";
                             }
                         }
-                        else{
-                            echo"<td>Unknown Location</td>";
-                        }
                     }
-                }
-                else{
-                    echo"<td>Unknown Branch</td>";
-                }
-                $total += $row['amount'];
-                foreach($row as $data){
-                    if($data != $row['client_id']){
-                        echo "<td>$".$data."</td>";
+                    else{
+                        echo"<td>Unknown Branch</td>";
                     }
-                }
-                echo "</tr>";
+               }
             }
-            $total+= $totalPayroll;
-            echo "<tr><td><b>Total Losses<b></td><td></td><td>$".$total."</td></table>";
+            else{
+                echo"<td>Unknown Account</td>";
+            }
+
+            $total += $row['amount'];
+            foreach($row as $data){
+                if($data != $row['account_id']){
+                    echo "<td>$".$data."</td>";
+                }
+            }
+            echo "</tr>";
         }
-        else 
-            echo "<h5>The bank has not make any Profits</h5>";
+        echo "<tr><td><b>Total Losses<b></td><td></td><td>$".($total+$totalPayroll)."</td></table>";
+    }
+    else 
+        echo "<h5>The bank has not make any Losses</h5>";
     
         
-        //LOSSES BY CITY  
-        
-        $sql = "SELECT client_id, amount FROM transaction WHERE type='withdraw';";
+    //LOSSES BY CITY  
     
-        $result = $conn->query($sql);
-    
-        $total = 0;
-    
-        if ($result->num_rows > 0) {
-          echo  "<br><br><h5>Losses By City</h5>
-                    <table border='1' class='highlight'>
-              <tr>
-                <th>City</th>
-                <th>Provence</th>
-                <th>Amount</th>
-              </tr>";
-            // output data of each row
-            while($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                $client_id = $row['client_id'];
-                $sqlBranch = "SELECT branch_id FROM client WHERE client_id=$client_id;";
-                $resultBranch = $conn->query($sqlBranch);
-                if ($resultBranch->num_rows > 0) {
-                    while($rowBranch = $resultBranch->fetch_assoc()){
-                        $branch_id = $rowBranch['branch_id'];
-                        $sqlLocation = "SELECT location FROM branch WHERE branch_id=$branch_id;";
-                        $resultLocation = $conn->query($sqlLocation);
-                        if($resultLocation->num_rows > 0){
-                            while($rowLocation = $resultLocation->fetch_assoc()){
-                                $location = $rowLocation['location'];
-                                $sqlCity = "SELECT provence, city FROM location WHERE location_id=$location;";
-                                $resultCity =  $conn->query($sqlCity);
-                                if($resultCity->num_rows > 0){
-                                    while($rowCity = $resultCity->fetch_assoc()){
-                                        $city = $rowCity['city'];
-                                        $provence = $rowCity['provence'];
-                                        echo"<td>".$city."</td>";
-                                        echo"<td>".$provence."</td>";
+    $sql = "SELECT account_id, amount FROM transaction WHERE type='withdraw';";
+
+    $result = $conn->query($sql);
+
+    $total = 0;
+
+    if ($result->num_rows > 0) {
+      echo  "<br><br><h5>Losses By City</h5>
+                <table border='1' class='highlight'>
+          <tr>
+            <th>City</th>
+            <th>Provence</th>
+            <th>Amount</th>
+          </tr>";
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            $account_id = $row['account_id'];
+            $sqlClient = "SELECT client_id FROM account WHERE account_number=$account_id;";
+            $resultClient = $conn->query($sqlClient);
+            if($resultClient->num_rows > 0){
+                while($rowClient = $resultClient->fetch_assoc()){
+                    $client_id = $rowClient['client_id'];
+                    $sqlBranch = "SELECT branch_id FROM client WHERE client_id=$client_id;";
+                    $resultBranch = $conn->query($sqlBranch);
+                    if ($resultBranch->num_rows > 0) {
+                        while($rowBranch = $resultBranch->fetch_assoc()){
+                            $branch_id = $rowBranch['branch_id'];
+                            $sqlLocation = "SELECT location FROM branch WHERE branch_id=$branch_id;";
+                            $resultLocation = $conn->query($sqlLocation);
+                            if($resultLocation->num_rows > 0){
+                                while($rowLocation = $resultLocation->fetch_assoc()){
+                                    $location = $rowLocation['location'];
+                                    $sqlCity = "SELECT provence, city FROM location WHERE location_id=$location;";
+                                    $resultCity =  $conn->query($sqlCity);
+                                    if($resultCity->num_rows > 0){
+                                        while($rowCity = $resultCity->fetch_assoc()){
+                                            $city = $rowCity['city'];
+                                            $provence = $rowCity['provence'];
+                                            echo"<td>".$city."</td>";
+                                            echo"<td>".$provence."</td>";
+                                        }
+                                    }
+                                    else{
+                                        echo"<td>Unknown City</td>";
                                     }
                                 }
-                                else{
-                                    echo"<td>Unknown City</td>";
-                                }
+                            }
+                            else{
+                                echo"<td>Unknown Location</td>";
                             }
                         }
-                        else{
-                            echo"<td>Unknown Location</td>";
-                        }
+                    }
+                    else{
+                        echo"<td>Unknown Branch</td>";
                     }
                 }
-                else{
-                    echo"<td>Unknown Branch</td>";
-                }
-    
-                $total += $row['amount'];
-                foreach($row as $data){
-                    if($data != $row['client_id']){
-                        echo "<td>$".$data."</td>";
-                    }
-                }
-                echo "</tr>";
             }
-            $total+= $totalPayroll;
-            echo "<tr><td><b>Total Losses<b></td><td></td><td>$".$total."</td></table>";
+            else{
+                echo"<td>Unknown Account</td>";
+            }
+            
+            $total += $row['amount'];
+            foreach($row as $data){
+                if($data != $row['account_id']){
+                    echo "<td>$".$data."</td>";
+                }
+            }
+            echo "</tr>";
         }
-        else 
-            echo "<h5>The bank has not make any Profits</h5>";
+        echo "<tr><td><b>Total Losses<b></td><td></td><td>$".($total+$totalPayroll)."</td></table>";
+    }
+    else 
+        echo "<h5>The bank has not make any Losses</h5>";
+
 
       $conn->close();
     ?>
