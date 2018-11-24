@@ -29,7 +29,7 @@
      $interest_rate_id = 1;
    }
 
-   $sql = "INSERT INTO account(balance, interest_rate_id, account_type, account_category, client_id) VALUES(0,1,'$account_type','$account_category',1);";
+   $sql = "INSERT INTO account(balance, interest_rate_id, account_type, account_category, client_id) VALUES(0,1,'$account_type','$account_category',$client_id);";
 
    if ($conn->query($sql) === TRUE) {
      echo "<script>M.toast({html: 'Account Created Successfully', classes: 'rounded'});</script>";

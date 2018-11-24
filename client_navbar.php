@@ -4,6 +4,7 @@
 <ul id="nav-mobile" class="right hide-on-med-and-down">
   <li><a href="welcome.php">Accounts</a></li>
   <li><a href="payBills.php">Pay Bill</a></li>
+  <li><a href="transfer.php">Transfer</a></li>
   <li><a href="signout.php">Log Out</a></li>
 </ul>
 </div>

@@ -3,11 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <style media="screen">
-    body {
-      background-color: lightblue;
-    }
-    </style>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
@@ -66,17 +61,17 @@
           if ($result->num_rows > 0) {
             echo     "<table border='1' class='highlight' id='account_table'>
                 <tr>
-                  <th>account_number</th>
-                  <th>balance</th>
-                  <th>account_type</th>
-                  <th>account_category</th>
-                  <th>number of transactions</th>
+                  <th>Account Number</th>
+                  <th>Balance</th>
+                  <th>Type</th>
+                  <th>Category</th>
+                  <th>Limit</th>
                 </tr>";
               // output data of each row
               while($row = $result->fetch_assoc()) {
                   echo "<tr>";
                     echo "<td>".$row['account_number']."</td>";
-                    echo "<td>".$row['balance']."</td>";
+                    echo "<td>$".$row['balance']."</td>";
                     echo "<td>".$row['account_type']."</td>";
                     echo "<td>".$row['account_category']."</td>";
                     echo "<td>".$row['transaction_limit']."</td>";
