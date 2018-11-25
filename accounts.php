@@ -65,6 +65,7 @@
             // output data of each row
             while($row = $result->fetch_assoc()) {
                 echo "<tr>";
+                $id = $row['account_number'];
                 foreach($row as $data){
                     if($data == $row['balance']){
                         echo "<td>$".$data."</td>";
@@ -73,6 +74,7 @@
                         echo "<td>".$data."</td>";
                     }
                 }
+                echo "<td><a class='waves-effect waves-light btn red darken-4' href=deleteAccount.php?id=$id>Delete</a></td><td><a class='waves-effect waves-light btn blue' href=modifyAccount.php?id=$id>Modify</td></tr>";
                 echo "</tr>";
             }
             echo "</table>";
