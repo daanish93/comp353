@@ -36,6 +36,8 @@
         if(isset($_SESSION['client_id'])){
           $client_id = $_SESSION['client_id'];
 
+          include('monthlyTransaction.php');
+
           $servername = "localhost";
           $username = "root";
           $password_db = "";
