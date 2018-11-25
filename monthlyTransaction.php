@@ -1,5 +1,5 @@
-
 <?php
+session_start();
 if(isset($_SESSION['client_id'])){
   $client_id = $_SESSION['client_id'];
 
@@ -74,17 +74,35 @@ if(isset($_SESSION['client_id'])){
         $date_now = date("Y-m-d");
         $account_id =  $row['account_id'];
         //echo "$account_id wasn't charged for $date_now <br>";
-        $sql = "INSERT INTO transaction(account_id, type, amount, date) VALUES ($x,'monthly payment',25,'$date_now');";
-        //echo "$sql<br>";
+        $sql = "SELECT `charge` FROM `chargeplan` WHERE `option_id` = (SELECT charge_plan_option_id FROM accountchargeplan WHERE account_id='$x')";
+        echo $sql . '<br>';
+        $result = $conn->query($sql);
 
-        if ($conn->query($sql) === TRUE) {
+        if ($result->num_rows > 0) {
 
-          //echo "SUCCES CHARGED <br>";
+          while($row = $result->fetch_assoc()) {
+            echo '---';
+            $charge = $row['charge'];
+            echo '---';
 
-        } else {
-            //echo "ERROR INSERTION<br>";
-                //echo "Error: " . $sql . "<br>" . $conn->error ."<br>";
+            $sql = "INSERT INTO transaction(account_id, type, amount, date) VALUES ($x,'monthly payment',$charge,'$date_now');";
+            echo "$sql<br>";
+
+            if ($conn->query($sql) === TRUE) {
+
+
+              echo "SUCCES CHARGED <br>";
+
+            } else {
+                echo "ERROR INSERTION<br>";
+                    echo "Error: " . $sql . "<br>" . $conn->error ."<br>";
+            }
+
+
+          }
         }
+
+
 
       }
       else{
