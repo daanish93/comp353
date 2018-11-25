@@ -1,5 +1,4 @@
 <?php
-session_start();
 if(isset($_SESSION['client_id'])){
   $client_id = $_SESSION['client_id'];
 
@@ -75,27 +74,58 @@ if(isset($_SESSION['client_id'])){
         $account_id =  $row['account_id'];
         //echo "$account_id wasn't charged for $date_now <br>";
         $sql = "SELECT `charge` FROM `chargeplan` WHERE `option_id` = (SELECT charge_plan_option_id FROM accountchargeplan WHERE account_id='$x')";
-        echo $sql . '<br>';
+        //echo $sql . '<br>';
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
 
           while($row = $result->fetch_assoc()) {
-            echo '---';
+            //echo '<br>---';
             $charge = $row['charge'];
-            echo '---';
+            //echo '---<br>';
 
             $sql = "INSERT INTO transaction(account_id, type, amount, date) VALUES ($x,'monthly payment',$charge,'$date_now');";
-            echo "$sql<br>";
+            //echo "$sql<br>";
 
             if ($conn->query($sql) === TRUE) {
+              $sql = "SELECT balance FROM account WHERE account_number = $x";
+
+              $result = $conn->query($sql);
+
+              if ($result->num_rows > 0) {
+
+                while($row = $result->fetch_assoc()) {
+
+                  //echo $row['balance'];
+
+                  $a = intval($row['balance']);
+                  $b = intval($charge);
+                  $c = $a - $b;
+
+                  $sql = "UPDATE `account` SET `balance`=$c WHERE `account_number` = $x";
+                  //echo $sql . "<br>";
+
+                  if ($conn->query($sql) === TRUE) {
+                    //echo "ALL GOOD";
+
+                  } else {
+                    //echo "ALL BAD";
+                  }
 
 
-              echo "SUCCES CHARGED <br>";
+                }
+
+              }
+
+
+
+
+
+              //echo "SUCCES CHARGED <br>";
 
             } else {
-                echo "ERROR INSERTION<br>";
-                    echo "Error: " . $sql . "<br>" . $conn->error ."<br>";
+                //echo "ERROR INSERTION<br>";
+                    //echo "Error: " . $sql . "<br>" . $conn->error ."<br>";
             }
 
 
