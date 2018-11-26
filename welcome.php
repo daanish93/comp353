@@ -68,6 +68,7 @@
                   <th>Type</th>
                   <th>Category</th>
                   <th>Limit</th>
+                  <th>Transactions</th>
                 </tr>";
               // output data of each row
               while($row = $result->fetch_assoc()) {
@@ -77,6 +78,7 @@
                     echo "<td>".$row['account_type']."</td>";
                     echo "<td>".$row['account_category']."</td>";
                     echo "<td>".$row['transaction_limit']."</td>";
+                    echo "<td>".$row['num_transaction']."</td>";
                   echo "</tr>";
               }
               echo "</table>";

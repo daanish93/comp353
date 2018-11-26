@@ -73,7 +73,7 @@
           while($row = $result->fetch_assoc()) {
               $account_number = $row['account_number'];
               $balance = $row['balance'];
-              echo "<option value = '$account_number'>Chequing Account #$account_number ($$balance)</option>";
+              echo "<option value = '$account_number'>Account #$account_number ($$balance)</option>";
           }
       }
       else{

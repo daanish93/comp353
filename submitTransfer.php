@@ -61,27 +61,44 @@ if(isset($_SESSION['client_id'])){
                 if ($conn->query($sql) == true) {
                     //Add the transaction
                     $sql = "INSERT INTO transaction(account_id, type, amount, date) 
-                            VALUES($chequing_account, 'transfer', -$amount, '$date');";
-                    $conn->query($sql);
-
-                    $sql = "INSERT INTO transaction(account_id, type, amount, date) 
-                    VALUES($savings_account, 'transfer', $amount, '$date');";
+                            VALUES($chequing_account, 'transfer', -$amount, '$date'), 
+                            ($savings_account, 'transfer', $amount, '$date');";
                     $conn->query($sql);
 
                     //Update client's num of transactions
-                    $sql = "SELECT num_transaction FROM client
-                    WHERE client_id=$client_id;";
+                    $sql = "SELECT num_transaction FROM account
+                    WHERE account_number=$chequing_account;";
                     $result = $conn->query($sql);
+
+                    //echo $sql;
 
                     if($result->num_rows > 0){
                         while($row = $result->fetch_assoc()) {
-                            $transcation = $row['num_transaction'];
-                          }
+                        $transaction = 1 + $row['num_transaction'];
+                        }
                     }
 
-                    $sql = "UPDATE client SET num_transaction=($transcation+1) 
-                    WHERE client_id=$client_id;";
+                    $sql = "UPDATE account SET num_transaction=$transaction
+                    WHERE account_number=$chequing_account;";
                     $conn->query($sql);
+
+                    $sql = "SELECT num_transaction FROM account
+                    WHERE account_number=$savings_account;";
+                    $result = $conn->query($sql);
+
+                    //echo $sql;
+
+                    if($result->num_rows > 0){
+                        while($row = $result->fetch_assoc()) {
+                        $transaction = 1 + $row['num_transaction'];
+                        }
+                    }
+
+                    $sql = "UPDATE account SET num_transaction=$transaction
+                    WHERE account_number=$savings_account;";
+                    $conn->query($sql);
+
+                    //check if exceeded num of trans (if so charge this biiiiih)
 
                 }
                 else{
