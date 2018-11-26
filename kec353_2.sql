@@ -36,11 +36,10 @@ CREATE TABLE `account` (
   `account_category` varchar(255) DEFAULT NULL,
   `client_id` int(11) NOT NULL,
   `transaction_limit` int(45) DEFAULT 25,
+  `num_transaction` int(11) DEFAULT 0,
   PRIMARY KEY (`account_number`),
-  KEY `savings_account_client_client_id_fk` (`client_id`),
-  KEY `savings_account_interest_interest_rate_id_fk` (`interest_rate_id`),
-  CONSTRAINT `savings_account_client_client_id_fk` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`) ON UPDATE CASCADE,
-  CONSTRAINT `savings_account_interest_interest_rate_id_fk` FOREIGN KEY (`interest_rate_id`) REFERENCES `interest` (`interest_rate_id`) ON UPDATE CASCADE
+  KEY `account_client_client_id_fk` (`client_id`),
+  CONSTRAINT `account_client_client_id_fk` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -50,7 +49,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES (1,0.00,NULL,'chequing','personal',1,50),(2,35906.09,NULL,'chequing','personal',2,50),(3,40183.21,NULL,'chequing','buisiness',3,50),(4,15733.93,NULL,'chequing','personal',4,50),(5,1980.39,NULL,'chequing','personal',5,50),(6,9201.71,NULL,'chequing','buisiness',6,90),(7,38899.68,NULL,'chequing','personal',7,50),(8,2788.90,NULL,'chequing','buisiness',8,56),(9,6457.68,NULL,'chequing','personal',9,45),(10,633.03,NULL,'chequing','buisiness',10,50),(11,500.00,1,'savings','personal',1,78),(12,7566.03,1,'savings','personal',2,10),(13,5412.96,1,'savings','personal',3,54),(14,91756.09,1,'savings','buisiness',4,80),(15,36673.54,1,'savings','personal',5,11),(16,4588.53,1,'savings','personal',6,67),(17,74.54,1,'savings','personal',7,32),(18,382.94,1,'savings','personal',8,21),(19,1000000.19,1,'savings','buisiness',9,78),(20,46883.02,1,'savings','personal',10,9),(21,0.00,1,'savings','personal',1,25),(22,0.00,1,'chequing','buisiness',1,40),(23,0.00,1,'savings','personal',1,24),(24,0.00,1,'chequing','personal',1,25),(25,0.00,1,'foreign currency','corporate',1,25);
+INSERT INTO `account` VALUES (1,0.00,NULL,'chequing','personal',1,50,0),(2,35906.09,NULL,'chequing','personal',2,50,0),(3,40183.21,NULL,'chequing','buisiness',3,50,0),(4,15733.93,NULL,'chequing','personal',4,50,0),(5,1980.39,NULL,'chequing','personal',5,50,0),(6,9201.71,NULL,'chequing','buisiness',6,90,0),(7,38899.68,NULL,'chequing','personal',7,50,0),(8,2788.90,NULL,'chequing','buisiness',8,56,0),(9,6457.68,NULL,'chequing','personal',9,45,0),(10,633.03,NULL,'chequing','buisiness',10,50,0),(11,500.00,1,'savings','personal',1,78,0),(12,7566.03,1,'savings','personal',2,10,0),(13,5412.96,1,'savings','personal',3,54,0),(14,91756.09,1,'savings','buisiness',4,80,0),(15,36673.54,1,'savings','personal',5,11,0),(16,4588.53,1,'savings','personal',6,67,0),(17,74.54,1,'savings','personal',7,32,0),(18,382.94,1,'savings','personal',8,21,0),(19,1000000.19,1,'savings','buisiness',9,78,0),(20,46883.02,1,'savings','personal',10,9,0),(21,0.00,1,'savings','personal',1,25,0),(22,0.00,1,'chequing','buisiness',1,40,0),(23,0.00,1,'savings','personal',1,24,0),(24,0.00,1,'chequing','personal',1,25,0),(25,0.00,1,'foreign currency','corporate',1,25,0);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -182,7 +181,6 @@ CREATE TABLE `client` (
   `branch_id` int(11) DEFAULT NULL,
   `card_number` bigint(255) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `num_transaction` int(11) DEFAULT 0,
   PRIMARY KEY (`client_id`),
   KEY `client_branch_branch_id_fk` (`branch_id`),
   CONSTRAINT `client_branch_branch_id_fk` FOREIGN KEY (`branch_id`) REFERENCES `branch` (`branch_id`) ON DELETE SET NULL ON UPDATE CASCADE
@@ -195,7 +193,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES (1,'John','Doe','1988-03-14','2010-12-28','1410 First St.','john.doe@myemail.ca',6049173416,'personal',9,1,'1',0),(2,'Roberto','Martinez','1999-01-21','2015-10-28','5358 Curabitur St.','roberto.martinez@hotmail.com',6049173416,'personal',4,3158327165548703,'UnYFhaNr',0),(3,'Steel','Dodson','1974-01-21','2018-12-28','5358 Curabitur St.','posuere.cubilia.Curae@Integermollis.ca',6049173416,'business',4,3158143778648560,'9Yntkb5b',0),(4,'Ingrid','Ramsey','1998-06-16','2017-11-18','1448 Id Av.','lectus.rutrum@lacusMauris.net',2895034697,'personal',5,3112993260722488,'bn0vBDbU',0),(5,'Yvonne','Medina','1956-04-24','2018-09-09','1742 Aliquet Av. Ap #468','nibh@Quisquepurus.org',6471292698,'corporate',8,3096977593570821,'X3jRxpq7',0),(6,'Cedric','Downs','1993-03-02','2018-03-02','6887 In St.','ligula.Aliquam.erat@ridiculusmusProin.org',571193,'personal',3,3112549547776901,'CVjivIXr',0),(7,'Oscar','Collins','1957-01-18','2017-10-12','929 Fringilla Av.','dolor.sit@ipsum.edu',5066766020,'personal',2,3528000456096913,'bDXoSUU9',0),(8,'Scott','Washington','1989-01-20','2018-08-06','4358 Nulla St.','Pellentesque@senectuset.net',5199605918,'personal',9,3158919489446950,'X3qcW2q3',0),(9,'Vance','Knapp','1981-04-04','2017-12-06','1793 Sed Rd.','Pellentesque@auctorveliteget.edu',9027169325,'business',2,3337581958558147,'XATbwYHm',0),(10,'Garrison','Hutchinson','1977-05-08','2018-05-13','5933 Eu Ave','convallis@velvulputateeu.ca',7781159114,'corporate',7,3088732316695151,'W1tP3kAV',0),(11,'kfkj','ksjfkljs','2018-10-30','2018-11-24','ffjkfh','jhsdkfh@jkdhfksf.com',1234567890,'3',2,123456789765432,'sffhjksfhksjfh',NULL);
+INSERT INTO `client` VALUES (1,'John','Doe','1988-03-14','2010-12-28','1410 First St.','john.doe@myemail.ca',6049173416,'personal',9,1,'1'),(2,'Roberto','Martinez','1999-01-21','2015-10-28','5358 Curabitur St.','roberto.martinez@hotmail.com',6049173416,'personal',4,3158327165548703,'UnYFhaNr'),(3,'Steel','Dodson','1974-01-21','2018-12-28','5358 Curabitur St.','posuere.cubilia.Curae@Integermollis.ca',6049173416,'business',4,3158143778648560,'9Yntkb5b'),(4,'Ingrid','Ramsey','1998-06-16','2017-11-18','1448 Id Av.','lectus.rutrum@lacusMauris.net',2895034697,'personal',5,3112993260722488,'bn0vBDbU'),(5,'Yvonne','Medina','1956-04-24','2018-09-09','1742 Aliquet Av. Ap #468','nibh@Quisquepurus.org',6471292698,'corporate',8,3096977593570821,'X3jRxpq7'),(6,'Cedric','Downs','1993-03-02','2018-03-02','6887 In St.','ligula.Aliquam.erat@ridiculusmusProin.org',571193,'personal',3,3112549547776901,'CVjivIXr'),(7,'Oscar','Collins','1957-01-18','2017-10-12','929 Fringilla Av.','dolor.sit@ipsum.edu',5066766020,'personal',2,3528000456096913,'bDXoSUU9'),(8,'Scott','Washington','1989-01-20','2018-08-06','4358 Nulla St.','Pellentesque@senectuset.net',5199605918,'personal',9,3158919489446950,'X3qcW2q3'),(9,'Vance','Knapp','1981-04-04','2017-12-06','1793 Sed Rd.','Pellentesque@auctorveliteget.edu',9027169325,'business',2,3337581958558147,'XATbwYHm'),(10,'Garrison','Hutchinson','1977-05-08','2018-05-13','5933 Eu Ave','convallis@velvulputateeu.ca',7781159114,'corporate',7,3088732316695151,'W1tP3kAV'),(11,'kfkj','ksjfkljs','2018-10-30','2018-11-24','ffjkfh','jhsdkfh@jkdhfksf.com',1234567890,'3',2,123456789765432,'sffhjksfhksjfh');
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 

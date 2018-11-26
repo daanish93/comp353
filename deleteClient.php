@@ -21,22 +21,18 @@
     }
 
     //Have to do it this eay somehow
-    $sql = "DELETE FROM chequingaccount WHERE client_id=$client_id;";
-    $sql2 = "DELETE FROM clientchargeplan WHERE account_id in (SELECT account_number FROM account WHERE client_id=$client_id);";       
+    $sql = "DELETE FROM transaction WHERE account_id in (SELECT account_number FROM account WHERE client_id=$client_id);";
+    $sql2 = "DELETE FROM accountchargeplan WHERE account_id in (SELECT account_number FROM account WHERE client_id=$client_id);";
     $sql3 = "DELETE FROM account WHERE client_id=$client_id;";
     $sql4 = "DELETE FROM liability WHERE client_id=$client_id;";
-    $sql5 = "DELETE FROM savingsaccount WHERE client_id=$client_id;";
-    $sql6 = "DELETE FROM transaction WHERE client_id=$client_id;";
-    $sql7 = "DELETE FROM client WHERE client_id=$client_id;";
+    $sql5 = "DELETE FROM client WHERE client_id=$client_id;";
 
     $conn->query($sql);
     $conn->query($sql2);
     $conn->query($sql3);
     $conn->query($sql4);
-    $conn->query($sql5);
-    $conn->query($sql6);
 
-    if($conn->query($sql7) === true){ 
+    if($conn->query($sql5) === true){ 
                header('Location: clients.php');
                echo "<script>M.toast({html: 'Client Successfully deleted!', classes: 'rounded'});</script>";
     } else{ 
