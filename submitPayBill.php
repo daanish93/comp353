@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 if(isset($_SESSION['client_id'])){
 
   if(isset($_POST['account_number'])){
